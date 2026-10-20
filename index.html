@@ -228,6 +228,7 @@ button:focus-visible, .opt:focus-visible, .circle:focus-visible { outline: 3px s
 .og-art.two svg { width: 250px; height: 250px; }
 .og-art.two svg:first-child { margin-right: 170px; }
 .og-art.two svg + svg { margin-top: -60px; margin-left: 170px; }
+.og-art.one svg { width: 340px; height: 340px; }
 .og-art.five { grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .og-art.five svg { width: 140px; height: 140px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
@@ -383,10 +384,10 @@ const PAIRS_Q = [
   ['P', 'G', '더 보람 있는 성과는?', '완전히 새로운 기능의 첫 버전을 내놓은 것', '기존 기능의 리텐션을 3% 끌어올린 것'],
   ['P', 'G', '내가 만든 기능이 출시된 뒤에는?', '여기까지 하고, 다음에 해 볼 새로운 것을 구상한다', '사용자가 어디서 이탈하는지 계속 들여다본다'],
   ['P', 'G', '내가 더 잘하는 일은?', '없던 것을 처음 만드는 일 (0을 1로)', '있는 것을 크게 키우는 일 (1을 10으로)'],
-  ['P', 'M', '새로운 기술이나 도구가 나오면?', '일단 써서 뭔가 만들어 본다', '우리 시스템에 들였을 때 생길 위험부터 따져 본다'],
+  ['P', 'M', '새로운 기술이나 도구가 나오면?', '일단 써서 뭔가 만들어 본다', '지금 운영 중인 시스템에 들일 만한지부터 따져 본다'],
   ['P', 'M', '더 마음이 편한 상황은?', '매주 새로운 것을 시도해 볼 수 있을 때', '맡은 시스템이 몇 달째 장애 없이 조용히 돌아갈 때'],
-  ['P', 'M', '의존성 업데이트나 보안 패치 같은 일은?', '필요할 때 몰아서 하고, 새로 만드는 일에 시간을 더 쓴다', '일정에 넣어 두고 미루지 않고 챙긴다'],
-  ['P', 'M', '더 맡고 싶은 일은?', '아직 이름도 없는 실험 프로젝트', '매출이 걸린 핵심 시스템'],
+  ['P', 'M', '같은 시스템을 오래 맡으면?', '익숙해질수록 새로운 걸 찾고 싶어진다', '깊이 알게 될수록 더 재미있어진다'],
+  ['P', 'M', '더 맡고 싶은 일은?', '아직 이름도 없는 실험 프로젝트', '수년째 돌아가는 핵심 시스템의 운영'],
   ['B', 'S', '기능 개발이 끝난 직후에는?', '바로 다음 기능 출시를 준비한다', '개발하면서 생긴 중복과 군더더기부터 정리한다'],
   ['B', 'S', 'AI 덕분에 코드를 두 배 빨리 쓰게 됐다면 먼저 드는 생각은?', '"더 많이 출시할 수 있겠다"', '"정리할 것도 두 배로 늘겠다"'],
   ['B', 'S', '더 자랑하고 싶은 성과는?', '3주 만에 새 서비스를 운영 환경에 올렸다', '페이지 로딩을 2초에서 0.5초로 줄였다'],
@@ -397,18 +398,18 @@ const PAIRS_Q = [
   ['B', 'G', '일이 잘 끝났다고 느끼는 때는?', '계획한 기능이 문제없이 출시됐을 때', '출시한 기능의 활성화, 리텐션 수치가 오를 때'],
   ['B', 'M', '인프라 작업 중 더 즐거운 쪽은?', '새 서비스의 인프라를 처음부터 세우는 일', '이미 돌아가는 인프라를 더 싸고 안정적으로 만드는 일'],
   ['B', 'M', '나에게 더 맞는 방식은?', '만들어서 넘기고 다음 프로젝트를 시작한다', '한 시스템을 몇 년이고 맡아 책임진다'],
-  ['B', 'M', '새벽에 장애 알림이 왔다면?', '빠르게 복구하고, 밀린 개발 일정부터 다시 챙긴다', '복구한 뒤 근본 원인과 재발 방지책까지 파고든다'],
+  ['B', 'M', '장애 대응 당번(온콜)을 맡게 되면?', '필요한 만큼만 하고, 만드는 일에 더 집중하고 싶다', '시스템을 깊이 알게 되는 기회라 오히려 반갑다'],
   ['B', 'M', '나를 대체하기 어려운 이유는?', '무엇이든 빠르게 실제 서비스 수준으로 만들어 내서', '시스템의 역사와 장애 패턴을 가장 잘 알아서'],
   ['S', 'G', '사용자가 헷갈려 한다는 피드백을 받으면?', '화면과 흐름을 단순하게 정리한다', '여러 버전을 실험해 어느 쪽 전환율이 높은지 본다'],
   ['S', 'G', '제품을 더 좋게 만드는 방법에 가까운 것은?', '필요 없는 것을 덜어내 단순하게 만든다', '사용자 반응을 보며 계속 맞춰 간다'],
   ['S', 'G', '더 오래 들여다보게 되는 것은?', '코드와 화면이 얼마나 깔끔한지', '사용자가 실제로 어떻게 쓰는지'],
   ['S', 'G', '성장 지표가 멈춰 있다면 먼저 의심하는 것은?', '너무 많아진 기능과 복잡함', '아직 채우지 못한 사용자의 필요'],
   ['S', 'M', '오래된 시스템을 새로 맡았다면?', '레거시를 걷어내고 단순하게 다시 정리한다', '함부로 건드리지 않고 안정성부터 확보한다'],
-  ['S', 'M', '성능을 손보게 되는 이유에 더 가까운 것은?', '느리고 복잡한 걸 그냥 두고 보기 힘들어서', '트래픽이 늘어도 시스템이 버티게 하려고'],
-  ['S', 'M', '더 큰 위험이라고 느끼는 것은?', '아무도 이해하지 못하는 복잡한 코드', '아무도 모르게 쌓이는 보안 취약점과 장애 가능성'],
+  ['S', 'M', '성능을 손보게 되는 이유에 더 가까운 것은?', '느리고 복잡한 걸 그냥 두고 보기 힘들어서', '사용자가 늘어도 비용과 응답 속도를 지금처럼 지키려고'],
+  ['S', 'M', '더 큰 위험이라고 느끼는 것은?', '아무도 이해하지 못하는 복잡한 코드', '잘 돌아가던 시스템이 변경 하나로 멈추는 것'],
   ['S', 'M', '나에게 더 맞는 일의 리듬은?', '한 번에 크게 정리하고 다음 일로 넘어간다', '매일 꾸준히 지켜보며 이상이 없는지 살핀다'],
-  ['G', 'M', '트래픽이 갑자기 몰리면?', '이 기회에 신규 사용자를 붙잡을 방법부터 찾는다', '시스템이 버티고 있는지부터 확인한다'],
-  ['G', 'M', '더 자주 열어 보는 대시보드는?', '가입, 활성화, 리텐션 퍼널', '에러율, 응답 시간, 인프라 비용'],
+  ['G', 'M', '트래픽이 갑자기 몰리면?', '이 기회에 신규 사용자를 붙잡을 방법부터 찾는다', '용량과 비용에 여유가 얼마나 남았는지부터 본다'],
+  ['G', 'M', '더 자주 열어 보는 대시보드는?', '가입, 활성화, 리텐션 퍼널', '장애 이력, 응답 시간, 인프라 비용'],
   ['G', 'M', '기능을 바꿔 달라는 요청이 몰리면?', '빠르게 실험해 보고 반응을 본다', '기존 사용자와 다른 시스템에 줄 영향부터 따진다'],
   ['G', 'M', '내 일이 잘됐다는 신호는?', '사용자가 늘고 더 자주 쓴다', '아무 장애 없이 조용히 지나간다']
 ];
@@ -441,13 +442,15 @@ function score(ans) {
   return out;
 }
 
-// 1위와 2위 역할은 항상 함께 보여 줍니다
+// 2위는 50점 이상일 때만 보조 역할로 보여 줍니다
+// 50점은 모든 문항에 비슷하다를 골랐을 때의 점수라, 그보다 낮으면 성향이 있다고 보기 어렵습니다
 // 3위는 2위와 10점 이내이면서 55점 이상일 때만 더합니다
 function classify(sc) {
   const sorted = ORDER.slice().sort((a, b) => sc[b] - sc[a] || TYPES[a].no - TYPES[b].no);
-  const picked = sorted.slice(0, 2);
+  const picked = [sorted[0]];
+  if (sc[sorted[1]] >= 50) picked.push(sorted[1]);
   const third = sorted[2];
-  if (sc[third] >= 55 && sc[sorted[1]] - sc[third] <= 10) picked.push(third);
+  if (picked.length === 2 && sc[third] >= 55 && sc[sorted[1]] - sc[third] <= 10) picked.push(third);
   return picked;
 }
 
@@ -727,8 +730,13 @@ function renderResult(shared, quiet) {
   const fits = stageFit(sc);
   const best = fits.indexOf(Math.max(...fits));
   const pairKey = ORDER.filter(t => picked.slice(0, 2).includes(t)).join('');
+  const combo = COMBOS[pairKey];
   let title, desc;
-  [title, desc] = COMBOS[pairKey];
+  if (combo) [title, desc] = combo;
+  else {
+    title = `${TYPES[picked[0]].ko} 중심형`;
+    desc = `${TYPES[picked[0]].ko} 성향이 다른 역할보다 뚜렷하게 앞섭니다. 나머지 역할은 모두 평균에 못 미칩니다.`;
+  }
   if (sc[picked[0]] < 56) {
     title = '다섯 역할 균형형';
     desc = '어느 한 역할로 크게 기울지 않았습니다. 상황에 맞춰 역할을 바꿔 쓰는 편입니다. 그중 가까운 두 역할을 보여 드립니다.';
@@ -752,10 +760,10 @@ function renderResult(shared, quiet) {
       <p class="sec-title">역할별 점수</p>
       ${ORDER.map(t => `<div class="bar ${picked.includes(t) ? 'on' : ''}" style="--c:var(${TYPES[t].c})"><span>${TYPES[t].ko}</span><span class="t"><span class="v" style="width:${sc[t]}%"></span></span><span class="num">${sc[t]}</span></div>`).join('')}
     </div>
-    <div class="combo-box">
+    ${combo ? `<div class="combo-box">
       <p class="sec-title">${picked.map(t => TYPES[t].ko).join(' + ')} 조합은</p>
-      <p>${esc(COMBOS[pairKey][2])}</p>
-    </div>
+      <p>${esc(combo[2])}</p>
+    </div>` : ''}
     ${picked.map((t, i) => {
       const x = TYPES[t];
       const sec = (label, items) => `<div class="rc-sec"><p class="lbl">${label}</p><ul>${items.map(v => `<li>${v}</li>`).join('')}</ul></div>`;
@@ -799,7 +807,7 @@ function renderResult(shared, quiet) {
         <div class="m-row"><p class="m-k">100점 환산</p>
           <p>역할별 최대 32점을 100점으로 바꿉니다.<br>모든 문항에 "비슷하다"를 고르면 다섯 역할 모두 50점입니다.</p></div>
         <div class="m-row"><p class="m-k">결과 표시</p>
-          <p>1위는 주 역할, 2위는 보조 역할로 항상 함께 보여 줍니다.<br>3위가 2위와 10점 이내이고 55점 이상이면 보조 역할로 더합니다.</p></div>
+          <p>1위는 주 역할입니다. 2위는 50점 이상일 때 보조 역할로 함께 보여 줍니다.<br>3위가 2위와 10점 이내이고 55점 이상이면 보조 역할로 더합니다.</p></div>
         <div class="m-row"><p class="m-k">제품 단계</p>
           <div><ul>
             <li><b>새로 시작하는 제품</b> 프로토타이퍼, 빌더, 스위퍼</li>
@@ -900,7 +908,8 @@ function readShared() {
 
 // 미리보기 이미지를 만들 때만 쓰는 화면입니다. ?og=main 또는 ?og=BS
 function renderOg(key) {
-  const pair = COMBOS[key];
+  const one = TYPES[key];
+  const pair = COMBOS[key] || (one && [`${one.ko} 중심형`]);
   const roles = pair ? ORDER.filter(t => key.includes(t)) : ORDER;
   document.body.innerHTML = `<div class="og">
     <div class="og-text">
@@ -908,11 +917,11 @@ function renderOg(key) {
       ${pair
         ? `<p class="og-code">${roles.map(t => `<span style="--c:var(${TYPES[t].c})">${t}</span>`).join('<i>+</i>')}</p>
            <p class="og-title">${esc(pair[0])}</p>
-           <p class="og-sub">${roles.map(t => TYPES[t].ko).join(' + ')}</p>`
+           <p class="og-sub">${one ? `${one.ko} 성향이 가장 뚜렷한 사람` : roles.map(t => TYPES[t].ko).join(' + ')}</p>`
         : `<p class="og-title big">AI 시대, 나는 팀에서<br>어떤 역할을 하는 사람일까</p>
            <p class="og-sub">보리스 체르니의 다섯 역할로 알아보는 40문항 테스트</p>`}
     </div>
-    <div class="og-art ${pair ? 'two' : 'five'}">${roles.map(art).join('')}</div>
+    <div class="og-art ${one ? 'one' : pair ? 'two' : 'five'}">${roles.map(art).join('')}</div>
   </div>`;
 }
 

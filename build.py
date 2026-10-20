@@ -55,9 +55,10 @@ def shot(key):
     ], check=True, capture_output=True)
 
 
-for key, name, desc in combos:
+singles = [(t, f'{n} 중심형', f'{n} 성향이 다른 역할보다 뚜렷하게 앞섭니다.') for t, n in NAMES.items()]
+for key, name, desc in combos + singles:
     code = '+'.join(key)
-    roles = ' + '.join(NAMES[t] for t in key)
+    roles = ' + '.join(NAMES[t] for t in key) if len(key) == 2 else '주 역할 ' + NAMES[key]
     (ROOT / 'r' / f'{key}.html').write_text(PAGE.format(
         site=SITE, key=key,
         title=html.escape(f'나의 개발자 아키타입은 {code}, {name}'),
@@ -65,4 +66,4 @@ for key, name, desc in combos:
     ))
     shot(key)
 shot('main')
-print('ok', len(combos), 'pages')
+print('ok', len(combos) + len(singles), 'pages')
