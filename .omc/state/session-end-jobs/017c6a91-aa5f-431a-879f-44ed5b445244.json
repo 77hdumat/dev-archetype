@@ -1,0 +1,343 @@
+{
+  "version": 1,
+  "jobId": "fff4cfeb-2aed-453d-a251-bd4466aa8ee4",
+  "sessionId": "017c6a91-aa5f-431a-879f-44ed5b445244",
+  "scopeKey": "5f11ab3fb889f5611e66b8b3588070210c3121b11b7bdb9714d5865152c17fc3",
+  "revision": 54,
+  "createdAt": "2026-10-20T04:51:12.497Z",
+  "updatedAt": "2026-10-20T04:51:44.003Z",
+  "producerGraceExpiresAt": "2026-10-20T04:51:42.497Z",
+  "bestEffortDeadlineAt": "2026-10-20T04:52:33.497Z",
+  "producers": {
+    "core": {
+      "state": "sealed",
+      "intentKey": "6932da1155320ac7914e6d9cada66a83b87134742613110d811e647a08e69e98",
+      "payloadDigest": "6932da1155320ac7914e6d9cada66a83b87134742613110d811e647a08e69e98",
+      "sealedAt": "2026-10-20T04:51:42.879Z",
+      "sealedBy": "recovery"
+    },
+    "wiki": {
+      "state": "no-op",
+      "sealedAt": "2026-10-20T04:51:12.529Z",
+      "sealedBy": "wiki-producer"
+    }
+  },
+  "actions": {
+    "foreground-cleanup": {
+      "class": "required",
+      "phase": "deferred-required",
+      "status": "completed",
+      "attempts": 1,
+      "idempotencyKey": "3100a8d0aca9dd9e9490d46c48ac7f2f0003bd8c5e16cc24195d2b398dab8fa8",
+      "payload": {
+        "transcriptPath": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+        "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+        "reason": "other",
+        "input": {
+          "session_id": "017c6a91-aa5f-431a-879f-44ed5b445244",
+          "transcript_path": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+          "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+          "scratchpad_dir": "/private/tmp/claude-501/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244/scratchpad",
+          "prompt_id": "7370758b-dafc-4a66-96df-570db7c339a2",
+          "hook_event_name": "SessionEnd",
+          "reason": "other"
+        },
+        "initialTeamNames": [],
+        "openClawRouting": {},
+        "metrics": {
+          "session_id": "017c6a91-aa5f-431a-879f-44ed5b445244",
+          "ended_at": "2026-10-20T04:51:42.718Z",
+          "reason": "other",
+          "agents_spawned": 0,
+          "agents_completed": 0,
+          "modes_used": []
+        }
+      },
+      "budgetMs": 9000,
+      "claimedAt": "2026-10-20T04:51:42.562Z",
+      "runner": {
+        "attempt": 1,
+        "runnerNonce": "a64f99e0-6a04-42ee-9a96-9802f014847f",
+        "phase": "terminal",
+        "deadlineAt": "2026-10-20T04:51:52.498Z"
+      },
+      "lastOutcomeCode": "completed",
+      "completedAt": "2026-10-20T04:51:42.869Z"
+    },
+    "wiki-capture": {
+      "class": "required",
+      "phase": "deferred-required",
+      "status": "completed",
+      "attempts": 0,
+      "idempotencyKey": "668acfb0f66db6a956c2c9e29eaa624b151ca43da0298a5c1eff0134d66cc870",
+      "payload": {
+        "transcriptPath": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+        "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+        "reason": "other",
+        "input": {
+          "session_id": "017c6a91-aa5f-431a-879f-44ed5b445244",
+          "transcript_path": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+          "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+          "scratchpad_dir": "/private/tmp/claude-501/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244/scratchpad",
+          "prompt_id": "7370758b-dafc-4a66-96df-570db7c339a2",
+          "hook_event_name": "SessionEnd",
+          "reason": "other"
+        },
+        "initialTeamNames": [],
+        "openClawRouting": {}
+      },
+      "budgetMs": 9000,
+      "completedAt": "2026-10-20T04:51:12.529Z"
+    },
+    "team-cleanup": {
+      "class": "required",
+      "phase": "deferred-required",
+      "status": "completed",
+      "attempts": 1,
+      "idempotencyKey": "796c4dec5568f12f1171f24d0f48528727d76d51418b4ef237236c3c3d0aea97",
+      "payload": {
+        "transcriptPath": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+        "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+        "reason": "other",
+        "input": {
+          "session_id": "017c6a91-aa5f-431a-879f-44ed5b445244",
+          "transcript_path": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+          "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+          "scratchpad_dir": "/private/tmp/claude-501/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244/scratchpad",
+          "prompt_id": "7370758b-dafc-4a66-96df-570db7c339a2",
+          "hook_event_name": "SessionEnd",
+          "reason": "other"
+        },
+        "initialTeamNames": [],
+        "openClawRouting": {},
+        "metrics": {
+          "session_id": "017c6a91-aa5f-431a-879f-44ed5b445244",
+          "ended_at": "2026-10-20T04:51:42.718Z",
+          "reason": "other",
+          "agents_spawned": 0,
+          "agents_completed": 0,
+          "modes_used": []
+        }
+      },
+      "budgetMs": 9000,
+      "claimedAt": "2026-10-20T04:51:42.909Z",
+      "runner": {
+        "attempt": 1,
+        "runnerNonce": "553aea84-931d-4861-ac55-ec737e34113e",
+        "phase": "terminal",
+        "deadlineAt": "2026-10-20T04:51:52.498Z"
+      },
+      "lastOutcomeCode": "completed",
+      "completedAt": "2026-10-20T04:51:43.059Z"
+    },
+    "python-cleanup": {
+      "class": "required",
+      "phase": "deferred-required",
+      "status": "completed",
+      "attempts": 1,
+      "idempotencyKey": "cde19a320ce2ce48a70c0d646c6bcf3243086b0c6ba1a4be5ea265a0c4dfb903",
+      "payload": {
+        "transcriptPath": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+        "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+        "reason": "other",
+        "input": {
+          "session_id": "017c6a91-aa5f-431a-879f-44ed5b445244",
+          "transcript_path": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+          "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+          "scratchpad_dir": "/private/tmp/claude-501/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244/scratchpad",
+          "prompt_id": "7370758b-dafc-4a66-96df-570db7c339a2",
+          "hook_event_name": "SessionEnd",
+          "reason": "other"
+        },
+        "initialTeamNames": [],
+        "openClawRouting": {},
+        "metrics": {
+          "session_id": "017c6a91-aa5f-431a-879f-44ed5b445244",
+          "ended_at": "2026-10-20T04:51:42.718Z",
+          "reason": "other",
+          "agents_spawned": 0,
+          "agents_completed": 0,
+          "modes_used": []
+        }
+      },
+      "budgetMs": 9000,
+      "claimedAt": "2026-10-20T04:51:43.078Z",
+      "runner": {
+        "attempt": 1,
+        "runnerNonce": "e4e73cfe-db8a-4866-8c15-30fdbbb449ab",
+        "phase": "terminal",
+        "deadlineAt": "2026-10-20T04:51:52.498Z"
+      },
+      "lastOutcomeCode": "completed",
+      "completedAt": "2026-10-20T04:51:43.282Z"
+    },
+    "reply-cleanup": {
+      "class": "required",
+      "phase": "deferred-required",
+      "status": "completed",
+      "attempts": 1,
+      "idempotencyKey": "b554b5131bc4f3ecfe9969cdd581685f1ce5468aef86471d272478dcc8a9df55",
+      "payload": {
+        "transcriptPath": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+        "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+        "reason": "other",
+        "input": {
+          "session_id": "017c6a91-aa5f-431a-879f-44ed5b445244",
+          "transcript_path": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+          "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+          "scratchpad_dir": "/private/tmp/claude-501/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244/scratchpad",
+          "prompt_id": "7370758b-dafc-4a66-96df-570db7c339a2",
+          "hook_event_name": "SessionEnd",
+          "reason": "other"
+        },
+        "initialTeamNames": [],
+        "openClawRouting": {}
+      },
+      "budgetMs": 9000,
+      "claimedAt": "2026-10-20T04:51:43.304Z",
+      "runner": {
+        "attempt": 1,
+        "runnerNonce": "7a7725f5-9545-4d4d-aa68-cbc0ea8712c6",
+        "phase": "terminal",
+        "deadlineAt": "2026-10-20T04:51:52.498Z"
+      },
+      "lastOutcomeCode": "completed",
+      "completedAt": "2026-10-20T04:51:43.455Z"
+    },
+    "callback": {
+      "class": "best-effort",
+      "phase": "deferred-best-effort",
+      "status": "completed",
+      "attempts": 1,
+      "idempotencyKey": "9457cff85277d6eef8a55991940b127ae1820add0a8b28175f9ddd8dd3d29f71",
+      "payload": {
+        "transcriptPath": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+        "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+        "reason": "other",
+        "input": {
+          "session_id": "017c6a91-aa5f-431a-879f-44ed5b445244",
+          "transcript_path": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+          "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+          "scratchpad_dir": "/private/tmp/claude-501/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244/scratchpad",
+          "prompt_id": "7370758b-dafc-4a66-96df-570db7c339a2",
+          "hook_event_name": "SessionEnd",
+          "reason": "other"
+        },
+        "initialTeamNames": [],
+        "openClawRouting": {},
+        "metrics": {
+          "session_id": "017c6a91-aa5f-431a-879f-44ed5b445244",
+          "ended_at": "2026-10-20T04:51:42.718Z",
+          "reason": "other",
+          "agents_spawned": 0,
+          "agents_completed": 0,
+          "modes_used": []
+        }
+      },
+      "budgetMs": 2000,
+      "claimedAt": "2026-10-20T04:51:43.477Z",
+      "runner": {
+        "attempt": 1,
+        "runnerNonce": "f89e0d44-5a39-4b74-9abb-282ab3796b6b",
+        "phase": "terminal",
+        "deadlineAt": "2026-10-20T04:51:52.498Z"
+      },
+      "lastOutcomeCode": "completed",
+      "completedAt": "2026-10-20T04:51:43.622Z"
+    },
+    "notification": {
+      "class": "best-effort",
+      "phase": "deferred-best-effort",
+      "status": "completed",
+      "attempts": 1,
+      "idempotencyKey": "b4396a3e5de2992d304f4016939df0a3cb94ac852c9dc98f823f195a00856d68",
+      "payload": {
+        "transcriptPath": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+        "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+        "reason": "other",
+        "input": {
+          "session_id": "017c6a91-aa5f-431a-879f-44ed5b445244",
+          "transcript_path": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+          "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+          "scratchpad_dir": "/private/tmp/claude-501/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244/scratchpad",
+          "prompt_id": "7370758b-dafc-4a66-96df-570db7c339a2",
+          "hook_event_name": "SessionEnd",
+          "reason": "other"
+        },
+        "initialTeamNames": [],
+        "openClawRouting": {},
+        "metrics": {
+          "session_id": "017c6a91-aa5f-431a-879f-44ed5b445244",
+          "ended_at": "2026-10-20T04:51:42.718Z",
+          "reason": "other",
+          "agents_spawned": 0,
+          "agents_completed": 0,
+          "modes_used": []
+        }
+      },
+      "budgetMs": 2000,
+      "claimedAt": "2026-10-20T04:51:43.647Z",
+      "runner": {
+        "attempt": 1,
+        "runnerNonce": "c39eb427-c67a-4b52-beeb-eb4e8cb3d288",
+        "phase": "terminal",
+        "deadlineAt": "2026-10-20T04:51:52.498Z"
+      },
+      "lastOutcomeCode": "completed",
+      "completedAt": "2026-10-20T04:51:43.793Z"
+    },
+    "openclaw": {
+      "class": "best-effort",
+      "phase": "deferred-best-effort",
+      "status": "completed",
+      "attempts": 1,
+      "idempotencyKey": "b0e23e80e5ca7a61b9c96e2f9773d628cd36c7b90b3a3fc346b4b540b21043af",
+      "payload": {
+        "transcriptPath": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+        "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+        "reason": "other",
+        "input": {
+          "session_id": "017c6a91-aa5f-431a-879f-44ed5b445244",
+          "transcript_path": "/Users/seomingyu/.claude/projects/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244.jsonl",
+          "cwd": "/Users/seomingyu/Desktop/dev-archetype",
+          "scratchpad_dir": "/private/tmp/claude-501/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244/scratchpad",
+          "prompt_id": "7370758b-dafc-4a66-96df-570db7c339a2",
+          "hook_event_name": "SessionEnd",
+          "reason": "other"
+        },
+        "initialTeamNames": [],
+        "openClawRouting": {},
+        "metrics": {
+          "session_id": "017c6a91-aa5f-431a-879f-44ed5b445244",
+          "ended_at": "2026-10-20T04:51:42.718Z",
+          "reason": "other",
+          "agents_spawned": 0,
+          "agents_completed": 0,
+          "modes_used": []
+        }
+      },
+      "budgetMs": 2000,
+      "claimedAt": "2026-10-20T04:51:43.815Z",
+      "runner": {
+        "attempt": 1,
+        "runnerNonce": "e00c2163-ccdb-448e-9706-14d9060cb3df",
+        "phase": "terminal",
+        "deadlineAt": "2026-10-20T04:51:52.498Z"
+      },
+      "lastOutcomeCode": "completed",
+      "completedAt": "2026-10-20T04:51:43.959Z"
+    }
+  },
+  "owner": null,
+  "phase": "complete",
+  "recoverableFailure": {
+    "reason": "actions-settled",
+    "releasedAt": "2026-10-20T04:51:43.980Z",
+    "ownerNonce": "20df7f6a-6af5-4db4-aace-8cb9f2662b76"
+  },
+  "completion": {
+    "completedAt": "2026-10-20T04:51:43.980Z",
+    "terminalDigest": "b22f9925d632824390633bb032d6f4f34a68d180a77a7aac7c3503ec1d2d0e04",
+    "terminalRevision": 53
+  }
+}
