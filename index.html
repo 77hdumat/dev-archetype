@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>개발자 아키타입 테스트</title>
+<meta name="description" content="Claude Code를 만든 보리스 체르니가 정의한 다섯 역할. 40문항으로 나의 주 역할과 보조 역할을 알아보세요.">
+<link rel="canonical" href="https://77hdumat.github.io/dev-archetype/">
+<meta name="theme-color" content="#5e51f0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%235e51f0'/%3E%3Ccircle cx='24' cy='32' r='10' fill='none' stroke='white' stroke-width='5'/%3E%3Ccircle cx='42' cy='32' r='10' fill='none' stroke='%23f0645a' stroke-width='5'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="개발자 아키타입 테스트">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:url" content="https://77hdumat.github.io/dev-archetype/">
+<meta property="og:title" content="AI 시대, 나는 팀에서 어떤 역할을 하는 사람일까">
+<meta property="og:description" content="Claude Code를 만든 보리스 체르니가 정의한 다섯 역할. 40문항으로 나의 주 역할과 보조 역할을 알아보세요.">
+<meta property="og:image" content="https://77hdumat.github.io/dev-archetype/og/main.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="개발자 아키타입 테스트">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI 시대, 나는 팀에서 어떤 역할을 하는 사람일까">
+<meta name="twitter:description" content="Claude Code를 만든 보리스 체르니가 정의한 다섯 역할. 40문항으로 나의 주 역할과 보조 역할을 알아보세요.">
+<meta name="twitter:image" content="https://77hdumat.github.io/dev-archetype/og/main.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* 흰 바탕 가운데 카드 한 장. 바닥에 보라, 분홍 빛 번짐. 한 화면에 한 문항, 끝나면 같은 자리에 결과 */
+:root {
+  --bg: #ffffff;
+  --glow-1: #efe4fb;
+  --glow-2: #fbe6ef;
+  --surface: #ffffff;
+  --option: #f6f6f9;
+  --ink: #111111;
+  --muted: #6e7180;
+  --line: #e3e4e9;
+  --brand: #5e51f0;
+  --on-brand: #ffffff;
+  --a: #5e51f0;
+  --b: #f0645a;
+  --mid: #c9cad3;
+  --p: #f0645a;
+  --bu: #5e51f0;
+  --s: #11a08f;
+  --g: #d9468a;
+  --m: #2b2f86;
+  --font-display: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-body: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e0f1a; --glow-1: #241a45; --glow-2: #3a1a35; --surface: #171827; --option: #20223a; --ink: #f2f2f7; --muted: #a3a6b8; --line: #2c2e45;
+    --brand: #8a80ff; --on-brand: #0e0f1a; --a: #8a80ff; --b: #ff8a80; --mid: #4a4d66;
+    --p: #ff8a80; --bu: #8a80ff; --s: #3fd0bc; --g: #ff7ab3; --m: #9fa6ff;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e0f1a; --glow-1: #241a45; --glow-2: #3a1a35; --surface: #171827; --option: #20223a; --ink: #f2f2f7; --muted: #a3a6b8; --line: #2c2e45;
+  --brand: #8a80ff; --on-brand: #0e0f1a; --a: #8a80ff; --b: #ff8a80; --mid: #4a4d66;
+  --p: #ff8a80; --bu: #8a80ff; --s: #3fd0bc; --g: #ff7ab3; --m: #9fa6ff;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; }
+body { word-break: keep-all; overflow-wrap: break-word; }
+img { max-width: 100%; }
+body { background: radial-gradient(120% 60% at 30% 100%, var(--glow-1), transparent 60%), radial-gradient(90% 50% at 85% 100%, var(--glow-2), transparent 60%), var(--bg); min-height: 100vh; color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+.wrap {
+  max-width: 820px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 72px;
+  display: grid; gap: 28px;
+}
+.head { text-align: center; display: grid; gap: 10px; }
+.head h1 { margin: 0; font-family: var(--font-display); font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 900; color: var(--ink); letter-spacing: -0.03em; text-wrap: balance; }
+.head p { margin: 0; color: var(--muted); }
+.card { background: var(--surface); border: 1.5px solid var(--line); border-radius: 20px; padding: clamp(20px, 4vw, 36px); box-shadow: 0 10px 40px rgb(94 81 240 / .06); display: grid; gap: 22px; }
+h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+button { font: inherit; cursor: pointer; }
+button:focus-visible, .opt:focus-visible, .circle:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+.btn { padding: 14px 24px; border-radius: 10px; border: 1px solid var(--brand); background: var(--brand); color: var(--on-brand); font-weight: 700; }
+.btn.ghost { background: transparent; color: var(--brand); }
+.row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+
+/* 시작 화면 */
+.intro { text-align: center; justify-items: center; }
+.intro .facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; color: var(--muted); font-size: 0.9rem; }
+.intro .facts b { color: var(--ink); font-family: var(--font-mono); }
+.intro h2 { font-size: 1.4rem; letter-spacing: -0.02em; }
+.intro-text { display: grid; gap: 0; width: 100%; max-width: 620px; text-align: left; }
+.about { display: grid; gap: 4px; padding-block: 14px; border-bottom: 1px solid var(--line); line-height: 1.7; }
+.about:first-child { border-top: 1px solid var(--line); }
+.about-k { font-size: 0.85rem; font-weight: 700; color: var(--brand); }
+.intro-art { display: flex; gap: 6px; justify-content: center; }
+.intro-art span { width: 44px; height: 44px; border-radius: 50%; border: 2px solid; }
+
+/* 진행 */
+.progress { display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 1.05rem; font-weight: 600; }
+.progress .cur { color: var(--brand); }
+.track { flex: 1; height: 10px; background: var(--line); border-radius: 5px; overflow: hidden; }
+.fill { height: 100%; width: 0; background: var(--brand); border-radius: 5px; transition: width .25s; }
+
+/* 문항 */
+.q-stem { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.5; }
+.opts { display: grid; gap: 12px; }
+.opt { text-align: left; border: 2px solid transparent; font-family: var(--font-body); background: var(--option); color: var(--ink); border-radius: 12px; padding: 18px 22px; font-size: 1rem; line-height: 1.5; display: flex; gap: 6px; }
+.opt b { flex: none; }
+.opt.on-a { border-color: var(--a); }
+.opt.on-b { border-color: var(--b); }
+.scale { display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; justify-items: center; padding-top: 6px; }
+.circle { border-radius: 50%; border: 3px solid var(--c); background: transparent; padding: 0; transition: background .15s, transform .15s; }
+.circle:hover { transform: scale(1.06); }
+.circle.sel { background: var(--c); }
+.circle[data-v="0"], .circle[data-v="4"] { width: 64px; height: 64px; }
+.circle[data-v="1"], .circle[data-v="3"] { width: 52px; height: 52px; }
+.circle[data-v="2"] { width: 44px; height: 44px; }
+.scale-labels { display: flex; justify-content: space-between; font-weight: 700; font-size: 1.05rem; margin-top: -6px; }
+.scale-labels span:nth-child(2) { font-weight: 400; font-size: 0.85rem; color: var(--muted); align-self: center; }
+.nav { display: flex; justify-content: space-between; align-items: center; min-height: 40px; }
+.link { background: none; border: 0; color: var(--muted); padding: 8px 4px; font-size: 0.9rem; }
+.link:disabled { opacity: 0.35; cursor: default; }
+@media (max-width: 480px) {
+  .circle[data-v="0"], .circle[data-v="4"] { width: 52px; height: 52px; }
+  .circle[data-v="1"], .circle[data-v="3"] { width: 42px; height: 42px; }
+  .circle[data-v="2"] { width: 34px; height: 34px; }
+}
+
+/* 결과 */
+.hero { display: grid; grid-template-columns: 180px 1fr; gap: 28px; align-items: center; }
+.hero-art svg { width: 100%; height: auto; display: block; }
+.hero .k { font-size: 0.85rem; color: var(--muted); }
+.code { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.02em; font-size: clamp(2.8rem, 10vw, 4.2rem); line-height: 1; display: flex; flex-wrap: wrap; gap: 4px; margin-block: 6px 10px; }
+.code span { color: var(--c); }
+.code i { font-style: normal; color: var(--muted); }
+.hero h2 { font-size: 1.5rem; letter-spacing: -0.02em; }
+.hero .desc { color: var(--muted); margin-top: 8px; }
+.sec-title { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; color: var(--muted); }
+.bars { display: grid; gap: 12px; }
+.bar { display: grid; grid-template-columns: 7.2em 1fr 2.6em; gap: 12px; align-items: center; }
+.bar .t { height: 14px; background: var(--line); border-radius: 7px; position: relative; overflow: hidden; }
+.bar .v { position: absolute; inset: 0 auto 0 0; background: var(--c); border-radius: 7px; }
+.bar .mid { position: absolute; left: 50%; top: -3px; bottom: -3px; width: 2px; background: var(--muted); opacity: 0.4; }
+.bar .num { font-family: var(--font-mono); text-align: right; font-variant-numeric: tabular-nums; }
+.bar:not(.on) .v { opacity: 0.4; }
+.bar.on { font-weight: 700; }
+.stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.stage { background: var(--option); border: 2px solid transparent; border-radius: 12px; padding: 14px; display: grid; gap: 2px; min-width: 0; }
+.stage .s1 { font-weight: 700; }
+.stage .s2 { font-size: 0.8rem; color: var(--muted); }
+.stage .pct { font-family: var(--font-mono); font-size: 1.4rem; font-weight: 600; font-variant-numeric: tabular-nums; margin-top: 4px; }
+.stage.best { border-color: var(--brand); }
+.stage.best .s1::after { content: "  잘 맞음"; color: var(--brand); font-size: 0.75rem; }
+.role-card { display: grid; grid-template-columns: 96px 1fr; gap: 20px; padding: 20px; border-radius: 14px; background: var(--option); }
+.role-card svg { width: 96px; height: 96px; }
+.role-card h3 { font-size: 1.15rem; }
+.role-card h3 small { font-family: var(--font-mono); font-weight: 500; color: var(--muted); font-size: 0.8rem; margin-left: 6px; }
+.role-card .body { display: grid; gap: 10px; min-width: 0; }
+.role-card ul { margin: 0; padding-left: 1.1em; display: grid; gap: 2px; }
+.role-card .lbl { font-weight: 700; color: var(--c); font-size: 0.85rem; }
+.gallery { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.mini { text-align: center; display: grid; gap: 4px; justify-items: center; font-size: 0.85rem; min-width: 0; }
+.mini svg { width: 100%; max-width: 110px; height: auto; }
+.mini b { font-family: var(--font-display); font-weight: 900; color: var(--c); font-size: 1.2rem; line-height: 1; }
+.mini.dim { opacity: 0.45; }
+.method { border-top: 1px solid var(--line); padding-top: 16px; }
+.method summary { cursor: pointer; color: var(--muted); font-size: 0.9rem; font-weight: 500; }
+.method-body { display: grid; gap: 0; margin-top: 14px; font-size: 0.9rem; line-height: 1.7; }
+.m-row { display: grid; grid-template-columns: 6.5em 1fr; gap: 16px; padding-block: 14px; border-bottom: 1px solid var(--line); }
+.m-row:last-child { border-bottom: 0; }
+.m-row > * { min-width: 0; }
+.m-k { font-weight: 700; color: var(--ink); }
+.m-row ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
+.m-row li b { margin-right: 6px; }
+.m-row .w { color: var(--muted); font-size: 0.85rem; }
+.pts { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; text-align: center; }
+.pts > div { display: grid; justify-items: center; align-content: start; gap: 4px; font-size: 0.8rem; }
+.pts span:not(.pc) { color: var(--muted); }
+.pc { display: block; border-radius: 50%; border: 2.5px solid var(--c); }
+.pc.big { width: 30px; height: 30px; }
+.pc.mid-c { width: 24px; height: 24px; margin-top: 3px; }
+.pc.small { width: 20px; height: 20px; margin-top: 5px; }
+.fx { position: fixed; inset: 0; pointer-events: none; z-index: 20; }
+.share-msg { text-align: center; color: var(--muted); font-size: 0.9rem; min-height: 1.6em; overflow-wrap: anywhere; }
+.roles-line { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; width: fit-content; padding: 4px 10px; border-radius: 999px; font-size: 0.8rem; color: var(--c, var(--muted)); background: color-mix(in srgb, var(--c, var(--muted)) 12%, var(--surface)); }
+.chip b { color: var(--ink); }
+.resume-note { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 16px; border-radius: 10px; background: color-mix(in srgb, var(--brand) 9%, var(--surface)); font-size: 0.9rem; }
+.resume-note .link { color: var(--brand); font-weight: 700; padding: 0; }
+@media (max-width: 600px) {
+  .m-row { grid-template-columns: 1fr; gap: 6px; }
+  .roles-line { justify-content: center; }
+  .hero { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 8px; }
+  .hero-art { width: 150px; }
+  .code { justify-content: center; }
+  .stages { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: repeat(3, 1fr); }
+  .role-card { grid-template-columns: 1fr; }
+}
+.og { width: 1200px; height: 630px; display: grid; grid-template-columns: 1fr 440px; align-items: center; gap: 32px; padding: 0 72px; box-sizing: border-box; overflow: hidden;
+  background: radial-gradient(70% 70% at 15% 110%, var(--glow-1), transparent 70%), radial-gradient(60% 60% at 95% 105%, var(--glow-2), transparent 70%), var(--bg); }
+.og-text { display: grid; gap: 18px; }
+.og-k { font-size: 26px; font-weight: 700; color: var(--brand); }
+.og-code { font-family: var(--font-display); font-weight: 900; font-size: 150px; line-height: 0.9; letter-spacing: -0.02em; display: flex; gap: 8px; }
+.og-code span { color: var(--c); }
+.og-code i { font-style: normal; color: var(--muted); }
+.og-title { font-family: var(--font-display); font-weight: 900; font-size: 50px; line-height: 1.2; letter-spacing: -0.03em; }
+.og-title.big { font-size: 56px; }
+.og-sub { font-size: 28px; color: var(--muted); }
+.og-art { display: grid; justify-items: center; align-items: center; }
+.og-art.two svg { width: 250px; height: 250px; }
+.og-art.two svg:first-child { margin-right: 170px; }
+.og-art.two svg + svg { margin-top: -60px; margin-left: 170px; }
+.og-art.five { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.og-art.five svg { width: 140px; height: 140px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <h1>개발자 아키타입 테스트</h1>
+    <p>AI 시대의 다섯 역할 중 나는 어디에 있을까요</p>
+  </header>
+
+  <section class="card intro" id="intro">
+    <div class="intro-art" aria-hidden="true">
+      <span style="border-color:var(--p)"></span><span style="border-color:var(--bu)"></span><span style="border-color:var(--s)"></span><span style="border-color:var(--g)"></span><span style="border-color:var(--m)"></span>
+    </div>
+    <h2>AI 시대, 나는 팀에서 어떤 역할을 하는 사람일까</h2>
+    <div class="intro-text">
+      <div class="about">
+        <p class="about-k">어디서 나온 이야기인가요?</p>
+        <p>Claude Code를 만든 Anthropic의 보리스 체르니(Boris Cherny)가 2026년 6월에 소개한 개념입니다. 그는 AI가 코드 작성을 맡으면서 엔지니어, PM, 디자이너, 데이터 사이언티스트 사이의 구분이 흐려지고 있다고 봤습니다. 그리고 자기 팀을 관찰하며, 직무 대신 다섯 가지 역할로 사람들이 나뉜다는 것을 발견했습니다.</p>
+      </div>
+      <div class="about">
+        <p class="about-k">무엇을 알 수 있나요?</p>
+        <p>이 역할은 직무와 상관없습니다. 같은 개발자라도 새 아이디어를 쏟아내는 사람이 있고, 만든 것을 정리하고 지키는 사람이 있습니다. 이 테스트는 내 직무가 아니라 내가 실제로 어떤 일에서 힘을 내는지를 보고, 다섯 역할 중 어디에 가까운지 알려 줍니다.</p>
+      </div>
+      <div class="about">
+        <p class="about-k">어떻게 하나요?</p>
+        <p>문항마다 A, B 두 문장이 나옵니다. 나에게 더 가까운 쪽을 고르면 됩니다. 대부분은 두세 역할에 걸쳐 있기 때문에, 결과도 주 역할과 보조 역할이 함께 나옵니다.</p>
+      </div>
+    </div>
+    <div class="facts"><span><b>40</b> 문항</span><span>약 <b>5</b>분</span></div>
+    <div class="row">
+      <button class="btn" id="btn-start" type="button">테스트 시작</button>
+      <button class="btn ghost" id="btn-resume" type="button" hidden>이어서 하기</button>
+    </div>
+  </section>
+
+  <section class="card" id="quiz" hidden aria-live="polite">
+    <div class="progress"><span><span class="cur" id="p-cur">1</span> / <span id="p-total">40</span></span><div class="track"><div class="fill" id="p-fill"></div></div></div>
+    <div class="resume-note" id="resume-note" hidden>
+      <span id="resume-text"></span>
+      <button type="button" class="link" id="btn-restart">처음부터 다시</button>
+    </div>
+    <p class="q-stem" id="q-stem"></p>
+    <div class="opts">
+      <button type="button" class="opt" id="opt-a"><b>A.</b><span></span></button>
+      <button type="button" class="opt" id="opt-b"><b>B.</b><span></span></button>
+    </div>
+    <div class="scale" id="scale" role="radiogroup" aria-label="A와 B 중 어느 쪽에 더 가까운지">
+      <button type="button" class="circle" data-v="0" style="--c:var(--a)" aria-label="A에 매우 가깝다"></button>
+      <button type="button" class="circle" data-v="1" style="--c:var(--a)" aria-label="A에 가깝다"></button>
+      <button type="button" class="circle" data-v="2" style="--c:var(--mid)" aria-label="비슷하다"></button>
+      <button type="button" class="circle" data-v="3" style="--c:var(--b)" aria-label="B에 가깝다"></button>
+      <button type="button" class="circle" data-v="4" style="--c:var(--b)" aria-label="B에 매우 가깝다"></button>
+    </div>
+    <div class="scale-labels"><span>A</span><span>비슷하다</span><span>B</span></div>
+    <div class="nav">
+      <button type="button" class="link" id="btn-prev">이전 문항</button>
+    </div>
+  </section>
+
+  <section class="card" id="result" hidden></section>
+</div>
+
+<script>
+const TYPES = {
+  P: { no: 1, ko: '프로토타이퍼', en: 'Prototyper', c: '--p',
+    def: '완전히 새로운 아이디어를 내고, 많은 아이디어를 쏟아냅니다. 그중 대부분은 출시되지 않습니다.',
+    sig: ['토론하기 전에 먼저 만들어서 보여 줍니다', '끝낼 때보다 시작할 때 에너지가 큽니다', '버려지는 실험에 미련이 적고, 아이디어를 내려놓는 데 자존심을 걸지 않습니다'],
+    plus: '아무것도 없는 곳에서 선택지를 만들어 냅니다. 아이디어 검증이 며칠에서 몇 시간으로 줄어든 지금, 가장 먼저 덕을 보는 역할입니다.',
+    risk: '좋은 아이디어를 끝까지 가져가지 못하기 쉽습니다. 만들기 쉬워진 만큼 실험만 쌓이고 배움은 남지 않을 수 있습니다.',
+    tip: '실험마다 "무엇을 확인하려는가"를 한 줄로 적어 두세요. 그중 하나는 완료 기준까지 끌고 가는 연습을 하세요.' },
+  B: { no: 2, ko: '빌더', en: 'Builder', c: '--bu',
+    def: '프로토타입이나 아이디어를 빠르게 프로덕션 수준의 제품과 인프라로 만듭니다.',
+    sig: ['데모를 실제 데이터와 트래픽에서도 버티게 만듭니다', '보안, 에러 처리, 테스트, 배포를 빼먹지 않습니다', '다른 사람이 이어받아도 무너지지 않아야 완료라고 봅니다'],
+    plus: '"돌아가는 데모"와 "고객이 쓰는 서비스" 사이를 메웁니다. 프로토타입이 싸질수록 이 역할의 가치는 커집니다.',
+    risk: '만들어야 하는지 묻기 전에 만들 수 있습니다. 검토 없이 AI 코드를 쏟아내면 가장 빠른 기술 부채 생산자가 됩니다.',
+    tip: '출시 전에 사용자 신호를 직접 확인해 보세요. 그로워 감각이 더해지면 어떻게 만들지를 넘어 무엇을 만들지까지 판단하게 됩니다.' },
+  S: { no: 3, ko: '스위퍼', en: 'Sweeper', c: '--s',
+    def: 'UI를 정리하고, 코드와 시스템을 단순하게 만들고, 기능을 걷어내고, 성능을 최적화합니다.',
+    sig: ['더하기보다 빼서 가치를 만듭니다', '중복, 불필요한 단계, 낡은 결정을 찾아냅니다', '쓰이지 않는 기능을 걷어내자고 먼저 말합니다'],
+    plus: '세 단계 제품 모두에 필요한 유일한 역할입니다. AI가 코드를 빨리 늘릴수록 덜어낼 줄 아는 감각이 귀해집니다.',
+    risk: '성과가 잘 보이지 않습니다. 새 기능보다 삭제가 덜 인정받는 평가 구조에서 손해를 보기 쉽습니다.',
+    tip: '줄인 의존성, 화면, 로딩 시간, 유지비를 숫자로 남기세요. 정리 대상은 AI로 찾되, 무엇을 뺄지는 직접 판단하세요.' },
+  G: { no: 4, ko: '그로워', en: 'Grower', c: '--g',
+    def: '이미 만들어진 제품을 받아 반복 개선하며 제품-시장 적합성(PMF)을 높입니다.',
+    sig: ['얼마나 잘 만들었는지보다 얼마나 잘 쓰이는지를 묻습니다', '지표와 사용자 대화로 우선순위를 정합니다', '작은 실험을 빠르게 반복합니다'],
+    plus: '아무도 안 쓰는 훌륭한 제품을 막습니다. 시장 반응을 처음으로 정면에서 마주하는 역할입니다.',
+    risk: '단기 지표에 흔들려 방향을 잃을 수 있습니다. "사용자가 좋아하는 것 같은" 기능만 계속 붙이면 제품이 복잡해집니다.',
+    tip: '지표는 어디서 이탈하는지만 알려 줍니다. 왜 그런지는 사용자에게 직접 물어 확인하세요.' },
+  M: { no: 5, ko: '메인테이너', en: 'Maintainer', c: '--m',
+    def: '성숙한 시스템을 책임지고, 규모가 커져도 안전하고 안정적이며 빠르고 효율적이게 만듭니다.',
+    sig: ['시스템이 조용히 잘 도는 데서 안도감을 느낍니다', '의존성, 장애 이력, 실패 패턴을 가장 잘 아는 팀의 기억입니다', '보안, 비용, 관측성, 장애 복구를 챙깁니다'],
+    plus: '사고가 나지 않아서 티가 나지 않는 일을 합니다. 강한 PMF 제품일수록 이 역할에 크게 기댑니다.',
+    risk: '"건드리지 마"가 필요한 현대화까지 막을 수 있습니다. 티가 안 나는 일이라 성과를 설명하기 어렵습니다.',
+    tip: '통제된 변화를 작게, 자주 시도하세요. 막아 낸 장애와 줄인 비용을 숫자로 남기는 것도 이 역할의 일입니다.' }
+};
+const ORDER = ['P', 'B', 'S', 'G', 'M'];
+
+// 두 역할을 맞세운 문항입니다. 역할 쌍마다 4문항씩, 모두 40문항입니다
+const PAIRS_Q = [
+  ['P', 'B', '새 프로젝트에서 더 신나는 순간은?', '아무도 안 해 본 아이디어를 처음 화면에 띄울 때', '그 아이디어가 실제 고객 트래픽을 받기 시작할 때'],
+  ['P', 'B', '동료에게 더 자주 듣는 말은?', '"벌써 데모가 나왔어요?"', '"벌써 운영 배포까지 끝났어요?"'],
+  ['P', 'B', '하루가 통째로 비었다면?', '새 아이디어 세 개를 빠르게 만들어 본다', '하나를 골라 인증, 에러 처리, 테스트까지 끝낸다'],
+  ['P', 'B', '나에게 "완료"란?', '동작하는 걸 보여 주고 반응을 확인하면 끝', '다른 사람이 이어받아도 무너지지 않아야 끝'],
+  ['P', 'S', '코드베이스에서 더 끌리는 작업은?', '새 파일, 새 모듈을 만드는 일', '파일과 의존성을 지우는 일'],
+  ['P', 'S', '실험 결과가 애매하게 나왔다면?', '다른 방향으로 새 실험을 또 만든다', '실험 코드를 깨끗이 걷어내고 단순한 상태로 되돌린다'],
+  ['P', 'S', '내 PR은 보통 어떤 모양인가요?', '추가된 줄이 훨씬 많다', '삭제된 줄이 훨씬 많다'],
+  ['P', 'S', '제품 화면을 볼 때 먼저 드는 생각은?', '여기에 이런 걸 붙여 보면 어떨까', '이 버튼과 단계는 빼도 되지 않을까'],
+  ['P', 'G', '아이디어는 주로 어디서 출발하나요?', '아무도 요청하지 않았지만 떠오른 가능성', '사용자 데이터와 피드백에서 보인 문제'],
+  ['P', 'G', '더 보람 있는 결과는?', '완전히 새로운 기능의 첫 버전', '기존 기능의 리텐션이 3% 오른 것'],
+  ['P', 'G', '내 기능이 출시된 뒤에는?', '이건 됐고, 다음 새로운 걸 구상한다', '사용자가 어디서 이탈하는지 계속 들여다본다'],
+  ['P', 'G', '내가 더 잘하는 일은?', '0을 1로 만드는 일', '1을 10으로 키우는 일'],
+  ['P', 'M', '새 기술이 나오면?', '일단 써서 뭔가 만들어 본다', '우리 시스템에 들였을 때 생길 위험부터 따진다'],
+  ['P', 'M', '더 편안한 환경은?', '매주 새로운 걸 시도할 수 있는 팀', '몇 달째 장애 없이 조용히 돌아가는 시스템'],
+  ['P', 'M', '의존성 업데이트나 보안 패치 같은 일은?', '솔직히 손이 잘 안 간다', '미루지 않고 챙긴다'],
+  ['P', 'M', '맡고 싶은 프로젝트는?', '아직 이름도 없는 실험 프로젝트', '매출이 걸린 핵심 시스템'],
+  ['B', 'S', '기능 개발이 끝난 직후에는?', '바로 다음 기능 출시를 준비한다', '그사이 생긴 중복과 군더더기부터 정리한다'],
+  ['B', 'S', 'AI 덕분에 코드 생산량이 두 배가 됐다면?', '그만큼 더 많이 출시할 기회다', '그만큼 정리해야 할 복잡도가 늘었다'],
+  ['B', 'S', '더 자랑하고 싶은 성과는?', '3주 만에 새 서비스를 운영 환경에 올렸다', '페이지 로딩을 2초에서 0.5초로 줄였다'],
+  ['B', 'S', '동료에게 듣고 싶은 말은?', '"덕분에 출시했어요"', '"덕분에 코드가 읽기 쉬워졌어요"'],
+  ['B', 'G', '기능의 다음 단계는?', '설계대로 견고하게 완성해서 출시한다', '작게 내보내고 지표를 보며 계속 바꾼다'],
+  ['B', 'G', '하루 중 더 많은 시간을 쓰는 곳은?', 'API, DB, 배포 파이프라인', '대시보드, 사용자 인터뷰, A/B 테스트'],
+  ['B', 'G', '더 신경 쓰이는 질문은?', '이게 실제 데이터와 트래픽을 버틸까', '이걸 사람들이 정말 원할까'],
+  ['B', 'G', '성공했다고 느끼는 기준은?', '문제없이 출시되고 운영된다', '활성화와 리텐션 수치가 오른다'],
+  ['B', 'M', '인프라 작업 중 더 즐거운 쪽은?', '새 서비스의 인프라를 처음 세우는 일', '이미 돌아가는 인프라를 더 싸고 안정적으로 만드는 일'],
+  ['B', 'M', '더 맞는 프로젝트 주기는?', '만들어서 넘기고 다음 프로젝트로 간다', '한 시스템을 몇 년이고 책임진다'],
+  ['B', 'M', '새벽에 장애 알림이 왔다면?', '빨리 고치고 하던 개발로 돌아간다', '근본 원인을 찾고 재발 방지 체계를 만든다'],
+  ['B', 'M', '내가 대체하기 어려운 이유는?', '무엇이든 빠르게 운영 수준으로 만들어서', '시스템의 역사와 장애 패턴을 가장 잘 알아서'],
+  ['S', 'G', '사용자가 헷갈려 한다는 피드백을 받으면?', '화면과 흐름을 단순하게 정리한다', '여러 버전을 실험해 어떤 쪽 전환율이 높은지 본다'],
+  ['S', 'G', '제품을 더 좋게 만드는 방법은?', '덜어내서 단순하게 만든다', '사용자 반응을 보며 맞춰 간다'],
+  ['S', 'G', '더 오래 붙잡고 있는 것은?', '코드와 화면의 품질', '사용자 행동 데이터'],
+  ['S', 'G', '성장 지표가 정체됐다면?', '쌓인 기능과 복잡도가 원인일 수 있다고 본다', '아직 못 찾은 사용자 니즈가 있다고 본다'],
+  ['S', 'M', '오래된 시스템을 맡았다면?', '레거시를 걷어내고 단순하게 다시 정리한다', '함부로 건드리지 않고 안정성부터 확보한다'],
+  ['S', 'M', '성능을 개선하는 이유는?', '느리고 지저분한 게 그냥 보기 싫어서', '트래픽이 늘어도 버티게 하려고'],
+  ['S', 'M', '더 큰 위험이라고 느끼는 것은?', '아무도 이해 못 하는 복잡한 코드', '아무도 모르게 쌓이는 보안 취약점과 장애 가능성'],
+  ['S', 'M', '나의 일하는 리듬은?', '한 번에 크게 정리하고 다음으로 넘어간다', '매일 꾸준히 지켜보며 다듬는다'],
+  ['G', 'M', '트래픽이 갑자기 몰리면?', '이 기회에 신규 사용자를 붙잡을 방법을 찾는다', '시스템이 버티는지부터 확인한다'],
+  ['G', 'M', '더 자주 여는 대시보드는?', '가입, 활성화, 리텐션 퍼널', '에러율, 응답 시간, 인프라 비용'],
+  ['G', 'M', '변경 요청이 몰릴 때는?', '빠르게 실험하고 반응을 본다', '기존 사용자와 연동에 줄 영향부터 따진다'],
+  ['G', 'M', '내 일이 잘됐다는 신호는?', '사용자가 늘고 더 자주 쓴다', '아무 일도 일어나지 않는다']
+];
+
+// 사람마다 같은 순서가 나오도록 고정 시드로 섞습니다
+function seededOrder(n, seed) {
+  const idx = [...Array(n).keys()];
+  let s = seed;
+  for (let i = n - 1; i > 0; i--) {
+    s = (s * 1103515245 + 12345) % 2147483648;
+    const j = s % (i + 1);
+    [idx[i], idx[j]] = [idx[j], idx[i]];
+  }
+  return idx;
+}
+// 홀수 번째 문항은 좌우를 바꿔서 한쪽 위치에 같은 역할이 몰리지 않게 합니다
+const QUESTIONS = seededOrder(PAIRS_Q.length, 2071379).map((i, n) => {
+  const [x, y, stem, tx, ty] = PAIRS_Q[i];
+  return n % 2 ? { a: y, b: x, stem, ta: ty, tb: tx } : { a: x, b: y, stem, ta: tx, tb: ty };
+});
+const MAX = QUESTIONS.length / 10 * 4 * 2;
+
+// 원 위치 0~4. 0이면 A 역할에 2점, 2면 양쪽에 1점, 4면 B 역할에 2점입니다
+function score(ans) {
+  const pts = {};
+  ORDER.forEach(t => { pts[t] = 0; });
+  QUESTIONS.forEach((q, i) => { pts[q.a] += (4 - ans[i]) / 2; pts[q.b] += ans[i] / 2; });
+  const out = {};
+  ORDER.forEach(t => { out[t] = Math.round(pts[t] / MAX * 100); });
+  return out;
+}
+
+// 1위와 2위 역할은 항상 함께 보여 줍니다
+// 3위는 2위와 10점 이내이면서 55점 이상일 때만 더합니다
+function classify(sc) {
+  const sorted = ORDER.slice().sort((a, b) => sc[b] - sc[a] || TYPES[a].no - TYPES[b].no);
+  const picked = sorted.slice(0, 2);
+  const third = sorted[2];
+  if (sc[third] >= 55 && sc[sorted[1]] - sc[third] <= 10) picked.push(third);
+  return picked;
+}
+
+const STAGES = [
+  { ko: '새로 시작하는 제품', sub: 'PMF 이전. 프로토타이퍼, 빌더, 스위퍼', w: { P: 1, B: 1, S: 1 } },
+  { ko: '성장하는 제품', sub: 'PMF 발견. 빌더, 스위퍼, 그로워, 약간의 메인테이너', w: { B: 1, S: 1, G: 1, M: 0.5 } },
+  { ko: '자리 잡은 제품', sub: '강한 PMF. 스위퍼, 그로워, 메인테이너, 약간의 빌더', w: { S: 1, G: 1, M: 1, B: 0.5 } }
+];
+function stageFit(sc) {
+  return STAGES.map(st => {
+    let sum = 0, wt = 0;
+    for (const t in st.w) { sum += sc[t] * st.w[t]; wt += st.w[t]; }
+    return Math.round(sum / wt);
+  });
+}
+
+const COMBOS = {
+  PB: ['0에서 1까지 혼자 가는 창업형', '아이디어를 내고 직접 출시까지 끌고 갑니다. 새 제품 팀의 핵심입니다.'],
+  PS: ['많이 만들고 과감히 버리는 실험 큐레이터', '실험을 쏟아내면서도 남길 것과 지울 것을 냉정하게 고릅니다.'],
+  PG: ['아이디어를 숫자로 검증하는 실험 설계자', '새 시도를 지표로 확인하며, 될 아이디어를 빨리 찾아냅니다.'],
+  PM: ['새 기술을 안전하게 들이는 탐험형 수문장', '드문 조합입니다. 새로운 방식을 시도하되 성숙한 시스템을 지키는 선을 압니다.'],
+  BS: ['빠르면서 깔끔한 장인형 빌더', '빠르게 출시하면서도 뒤에 남는 부채를 스스로 줄입니다.'],
+  BG: ['출시하고 키우는 그로스 엔지니어', '기능을 내보내고, 반응을 보며 다시 만듭니다. 성장하는 팀이 가장 원하는 조합입니다.'],
+  BM: ['세우고 오래 지키는 플랫폼 엔지니어', '인프라를 처음 세우는 일과 그것을 오래 굴리는 일을 모두 해냅니다.'],
+  SG: ['덜어내며 PMF를 올리는 제품 다듬이', '더하는 대신 빼서 제품이 더 잘 쓰이게 만듭니다.'],
+  SM: ['성숙한 시스템의 정원사', '커진 시스템을 단순하고, 빠르고, 안전하게 유지합니다.'],
+  GM: ['성장과 안정을 함께 지는 스케일 운영자', '커지는 제품의 지표와 안정성을 동시에 책임집니다.']
+};
+
+// 역할별 일러스트입니다. --c 는 역할 색입니다
+const ART = {
+  P: `<path d="M100 26v14M48 46l10 10M152 46l-10 10M30 94h14M156 94h14" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/>
+    <rect x="138" y="120" width="28" height="28" rx="4" fill="var(--c)" opacity=".45" transform="rotate(12 152 134)"/>
+    <rect x="30" y="124" width="24" height="24" rx="4" fill="var(--c)" opacity=".3" transform="rotate(-10 42 136)"/>
+    <path d="M100 52a40 40 0 0 0-24 72c6 5 8 10 8 16h32c0-6 2-11 8-16a40 40 0 0 0-24-72z" fill="var(--c)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M92 122v-16a8 8 0 0 1 16 0v16" fill="none" stroke="var(--surface)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="82" y="146" width="36" height="10" rx="4" fill="var(--ink)"/><rect x="88" y="160" width="24" height="9" rx="4" fill="var(--ink)"/>`,
+  B: `<path d="M38 172h36M126 172h36" stroke="var(--ink)" stroke-width="5" stroke-linecap="round" opacity=".3"/>
+    <path d="M88 136q12 46 24 0z" fill="var(--c)" opacity=".5"/>
+    <path d="M100 28c24 18 32 52 26 96H74c-6-44 2-78 26-96z" fill="var(--surface)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M100 28c10 7 17 17 21 28H79c4-11 11-21 21-28z" fill="var(--c)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
+    <circle cx="100" cy="82" r="12" fill="var(--c)" stroke="var(--ink)" stroke-width="5"/>
+    <path d="M75 100l-20 30h22zM125 100l20 30h-22z" fill="var(--c)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
+    <rect x="85" y="124" width="30" height="11" rx="2" fill="var(--ink)"/>`,
+  S: `<path d="M48 54l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="var(--c)"/>
+    <path d="M150 34L96 120" stroke="var(--ink)" stroke-width="9" stroke-linecap="round"/>
+    <path d="M80 110l32 20-14 32c-15 6-36-6-42-22z" fill="var(--c)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M82 116l27 16" stroke="var(--ink)" stroke-width="5"/>
+    <text x="124" y="160" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="28" font-weight="600" fill="var(--ink)" opacity=".5">{ }</text>
+    <rect x="160" y="168" width="8" height="8" fill="var(--c)"/><rect x="172" y="152" width="6" height="6" fill="var(--c)" opacity=".6"/>`,
+  G: `<path d="M28 168h144" stroke="var(--ink)" stroke-width="5" stroke-linecap="round" opacity=".3"/>
+    <rect x="40" y="128" width="20" height="40" rx="3" fill="var(--c)" opacity=".3"/>
+    <rect x="66" y="106" width="20" height="62" rx="3" fill="var(--c)" opacity=".5"/>
+    <path d="M34 82l22-18 16 10 24-24" fill="none" stroke="var(--ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M84 50h12v12" fill="none" stroke="var(--ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M130 134V72" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/>
+    <path d="M130 104c-22 2-30-12-30-24 18 0 30 8 30 24z" fill="var(--surface)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M130 88c20 0 30-14 30-28-18 0-30 10-30 28z" fill="var(--c)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M102 134h56l-8 34h-40z" fill="var(--c)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>`,
+  M: `<circle cx="146" cy="146" r="26" fill="none" stroke="var(--c)" stroke-width="13" stroke-dasharray="10 7" opacity=".55"/>
+    <circle cx="146" cy="146" r="17" fill="var(--c)" opacity=".55"/>
+    <path d="M94 34l52 19v37c0 35-23 58-52 70-29-12-52-35-52-70V53z" fill="var(--c)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M74 96l14 14 28-30" fill="none" stroke="var(--surface)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`
+};
+function art(t) {
+  return `<svg viewBox="0 0 200 200" role="img" aria-label="${TYPES[t].ko} 일러스트" style="--c:var(${TYPES[t].c})">
+    <circle cx="100" cy="100" r="94" fill="color-mix(in srgb, var(--c) 14%, var(--surface))"/>${ART[t]}</svg>`;
+}
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const KEY = 'archetype-ab-v1';
+let answers = Array(QUESTIONS.length).fill(null);
+let cur = 0;
+let advancing = null;
+
+function save() { try { localStorage.setItem(KEY, JSON.stringify({ answers, cur })); } catch (e) {} }
+function show(id) { ['intro', 'quiz', 'result'].forEach(s => { $('#' + s).hidden = s !== id; }); }
+
+function renderQ() {
+  const q = QUESTIONS[cur];
+  $('#p-cur').textContent = cur + 1;
+  $('#p-total').textContent = QUESTIONS.length;
+  $('#p-fill').style.width = ((cur + 1) / QUESTIONS.length * 100) + '%';
+  $('#q-stem').textContent = q.stem;
+  $('#opt-a span').textContent = q.ta;
+  $('#opt-b span').textContent = q.tb;
+  const v = answers[cur];
+  document.querySelectorAll('.circle').forEach(c => {
+    const on = Number(c.dataset.v) === v;
+    c.classList.toggle('sel', on);
+    c.setAttribute('aria-checked', on);
+    c.setAttribute('role', 'radio');
+  });
+  $('#opt-a').classList.toggle('on-a', v !== null && v < 2);
+  $('#opt-b').classList.toggle('on-b', v !== null && v > 2);
+  $('#btn-prev').disabled = cur === 0;
+}
+
+function pick(v) {
+  if (advancing) return;
+  $('#resume-note').hidden = true;
+  answers[cur] = v;
+  renderQ();
+  save();
+  advancing = setTimeout(() => {
+    advancing = null;
+    const next = answers.findIndex(a => a === null);
+    if (next === -1) { renderResult(); return; }
+    cur = cur + 1 < QUESTIONS.length && answers[cur + 1] === null ? cur + 1 : next;
+    save();
+    renderQ();
+  }, 260);
+}
+
+// 결과가 나올 때 3D 폭죽을 터뜨립니다
+// three.js 는 이때 처음 불러와서 문항 화면을 가볍게 둡니다
+function celebrate(colors) {
+  if (window.THREE) return fireworks(colors);
+  const el = document.createElement('script');
+  el.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+  el.onload = () => fireworks(colors);
+  document.head.appendChild(el);
+}
+
+function fireworks(colors) {
+  const T = window.THREE;
+  let renderer;
+  try { renderer = new T.WebGLRenderer({ alpha: true, antialias: true }); } catch (e) { return; }
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setClearColor(0x000000, 0);
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.domElement.className = 'fx';
+  document.body.appendChild(renderer.domElement);
+
+  // 화면 픽셀 좌표를 그대로 쓰는 직교 카메라입니다. 위가 0, 아래로 갈수록 음수입니다
+  const scene = new T.Scene();
+  const cam = new T.OrthographicCamera(0, innerWidth, 0, -innerHeight, -2000, 2000);
+  const fit = () => {
+    cam.right = innerWidth;
+    cam.bottom = -innerHeight;
+    cam.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+  };
+  addEventListener('resize', fit);
+  scene.add(new T.HemisphereLight(0xffffff, 0xcfd8ff, 1.2));
+  const key = new T.DirectionalLight(0xffffff, 1);
+  key.position.set(200, 400, 600);
+  scene.add(key);
+
+  const star = new T.Shape();
+  for (let i = 0; i < 10; i++) {
+    const rr = i % 2 ? 0.48 : 1;
+    const a = (i / 10) * Math.PI * 2 + Math.PI / 2;
+    star[i ? 'lineTo' : 'moveTo'](Math.cos(a) * rr, Math.sin(a) * rr);
+  }
+  const heart = new T.Shape();
+  heart.moveTo(0, -0.9);
+  heart.bezierCurveTo(-1.3, 0, -0.9, 1.05, 0, 0.45);
+  heart.bezierCurveTo(0.9, 1.05, 1.3, 0, 0, -0.9);
+  const extrude = sh => new T.ExtrudeGeometry(sh, { depth: 0.35, bevelEnabled: true, bevelThickness: 0.15, bevelSize: 0.12, bevelSegments: 2 }).center();
+  const CAP = reduce ? 80 : 320;
+  // 모양마다 InstancedMesh 하나로 그립니다. 별, 하트, 구슬, 상자 순서입니다
+  const pools = [extrude(star), extrude(heart), new T.SphereGeometry(0.7, 16, 12), new T.BoxGeometry(1.2, 1.2, 1.2)].map(geo => {
+    const mesh = new T.InstancedMesh(geo, new T.MeshStandardMaterial({ roughness: 0.35, metalness: 0.05 }), CAP);
+    mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);
+    mesh.setColorAt(0, new T.Color());
+    mesh.frustumCulled = false;
+    mesh.count = 0;
+    scene.add(mesh);
+    return { mesh, items: [] };
+  });
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const pickColor = () => new T.Color(colors[Math.floor(Math.random() * colors.length)]);
+  const add = (shape, p) => { if (pools[shape].items.length < CAP) pools[shape].items.push(p); };
+
+  // 한 점에서 별, 하트, 구슬이 사방으로 터집니다
+  const burst = (x, y, n) => {
+    const color = pickColor();
+    for (let i = 0; i < n; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const v = rnd(150, 460);
+      add([0, 0, 1, 2, 3][i % 5], {
+        x, y, z: rnd(100, 150), vx: Math.cos(a) * v, vy: Math.sin(a) * v + 80,
+        rx: rnd(0, 6), ry: rnd(0, 6), wx: rnd(-7, 7), wy: rnd(-7, 7),
+        size: rnd(6, 13), t: 0, life: rnd(1.1, 1.7), gravity: 380, drag: 1.6, flutter: 0,
+        color: i % 3 ? color : pickColor()
+      });
+    }
+  };
+  // 화면 위에서 색종이가 팔랑거리며 내려옵니다
+  const confetti = n => {
+    for (let i = 0; i < n; i++) {
+      add(i % 4 === 0 ? 1 : i % 3 === 0 ? 3 : 0, {
+        x: rnd(0, innerWidth), y: rnd(40, 300), z: rnd(0, 200), vx: rnd(-60, 60), vy: rnd(-200, -60),
+        rx: rnd(0, 6), ry: rnd(0, 6), wx: rnd(-4, 4), wy: rnd(-4, 4),
+        size: rnd(7, 14), t: -rnd(0, 0.8), life: rnd(3, 4.5), gravity: 60, drag: 0.6, flutter: 70,
+        color: pickColor()
+      });
+    }
+  };
+
+  // 아래에서 솟아오르다 목표 높이에서 터지는 폭죽입니다
+  const rockets = [];
+  const launches = reduce ? [0, 0.5] : [0, 0.3, 0.6, 0.95, 1.3, 1.7];
+  launches.forEach((at, i) => rockets.push({
+    at, x: innerWidth * (0.15 + 0.7 * ((i * 0.37 + 0.2) % 1)), y: -innerHeight - 20,
+    top: -innerHeight * rnd(0.18, 0.45), vy: innerHeight * 1.5, live: false, done: false
+  }));
+  setTimeout(() => confetti(reduce ? 30 : 140), 250);
+
+  const m = new T.Matrix4(), q = new T.Quaternion(), e = new T.Euler(), pv = new T.Vector3(), sv = new T.Vector3();
+  let last = performance.now(), clock = 0;
+  const loop = now => {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    clock += dt;
+    for (const rk of rockets) {
+      if (rk.done || clock < rk.at) continue;
+      rk.y += rk.vy * dt;
+      rk.vy *= 1 - 1.2 * dt;
+      add(2, { x: rk.x + rnd(-2, 2), y: rk.y, z: 120, vx: rnd(-20, 20), vy: -40, rx: 0, ry: 0, wx: 0, wy: 0,
+        size: 4, t: 0, life: 0.35, gravity: 0, drag: 0, flutter: 0, color: new T.Color('#ffd166') });
+      if (rk.y >= rk.top) { rk.done = true; burst(rk.x, rk.y, reduce ? 24 : 70); }
+    }
+    let alive = 0;
+    for (const pool of pools) {
+      pool.items = pool.items.filter(p => (p.t += dt) < p.life);
+      pool.items.forEach((p, i) => {
+        p.vy -= p.gravity * dt;
+        p.vx *= 1 - p.drag * dt;
+        p.vy *= 1 - p.drag * dt;
+        p.x += (p.vx + Math.sin(p.t * 6 + p.rx) * p.flutter) * dt;
+        p.y += p.vy * dt;
+        p.rx += p.wx * dt;
+        p.ry += p.wy * dt;
+        const k = p.t / p.life;
+        // 톡 커졌다가 끝에서 쪼그라듭니다
+        const sz = k < 0 ? 0 : p.size * Math.min(1, k * 8) * (k > 0.7 ? (1 - k) / 0.3 : 1);
+        m.compose(pv.set(p.x, p.y, p.z), q.setFromEuler(e.set(p.rx, p.ry, 0)), sv.set(sz, sz, sz));
+        pool.mesh.setMatrixAt(i, m);
+        pool.mesh.setColorAt(i, p.color);
+      });
+      pool.mesh.count = pool.items.length;
+      pool.mesh.instanceMatrix.needsUpdate = true;
+      if (pool.mesh.instanceColor) pool.mesh.instanceColor.needsUpdate = true;
+      alive += pool.items.length;
+    }
+    renderer.render(scene, cam);
+    if (clock < 1 || alive || rockets.some(rk => !rk.done)) return requestAnimationFrame(loop);
+    // 다 끝나면 캔버스와 GPU 자원을 정리합니다
+    removeEventListener('resize', fit);
+    pools.forEach(pool => { pool.mesh.geometry.dispose(); pool.mesh.material.dispose(); });
+    renderer.dispose();
+    renderer.domElement.remove();
+  };
+  requestAnimationFrame(loop);
+}
+
+// shared 가 있으면 공유 링크로 받은 남의 결과를 보여 줍니다
+// quiet 이면 폭죽 없이 보여 줍니다. 새로고침으로 결과를 다시 띄울 때 씁니다
+function renderResult(shared, quiet) {
+  const sc = shared || score(answers);
+  const picked = classify(sc);
+  const fits = stageFit(sc);
+  const best = fits.indexOf(Math.max(...fits));
+  const pairKey = ORDER.filter(t => picked.slice(0, 2).includes(t)).join('');
+  let title, desc;
+  [title, desc] = COMBOS[pairKey];
+  if (sc[picked[0]] < 56) {
+    title = '다섯 역할 균형형';
+    desc = '어느 한 역할로 크게 기울지 않았습니다. 상황에 맞춰 역할을 바꿔 쓰는 편입니다. 그중 가까운 두 역할을 보여 드립니다.';
+  } else if (picked.length === 3) {
+    desc += ` 여기에 ${TYPES[picked[2]].ko} 성향까지 더해 세 역할을 넘나듭니다.`;
+  }
+
+  $('#result').innerHTML = `
+    <div class="hero">
+      <div class="hero-art">${art(picked[0])}</div>
+      <div>
+        <p class="k">${shared ? '친구의 아키타입' : '나의 아키타입'}</p>
+        <div class="code" aria-label="${picked.map(t => TYPES[t].ko).join(', ')}">${picked.map(t => `<span style="--c:var(${TYPES[t].c})">${t}</span>`).join('<i>+</i>')}</div>
+        <h2>${esc(title)}</h2>
+        <p class="roles-line">${picked.map((t, i) => `<span class="chip" style="--c:var(${TYPES[t].c})">${i === 0 ? '주 역할' : '보조 역할'} <b>${TYPES[t].ko}</b></span>`).join('')}</p>
+        <p class="desc">${esc(desc)}</p>
+      </div>
+    </div>
+    <div class="bars">
+      <p class="sec-title">역할별 점수 (가운데 선이 평균 50)</p>
+      ${ORDER.map(t => `<div class="bar ${picked.includes(t) ? 'on' : ''}" style="--c:var(${TYPES[t].c})"><span>${TYPES[t].ko}</span><span class="t"><span class="v" style="width:${sc[t]}%"></span><span class="mid"></span></span><span class="num">${sc[t]}</span></div>`).join('')}
+    </div>
+    ${picked.map((t, i) => `<div class="role-card" style="--c:var(${TYPES[t].c})">${art(t)}<div class="body">
+      <p class="chip">${i === 0 ? '주 역할' : '보조 역할'} ${sc[t]}점</p>
+      <h3>${TYPES[t].ko}<small>${TYPES[t].en}</small></h3>
+      <p>${esc(TYPES[t].def)}</p>
+      <div><p class="lbl">이렇게 일합니다</p><ul>${TYPES[t].sig.map(s => `<li>${esc(s)}</li>`).join('')}</ul></div>
+      <div><p class="lbl">강점</p><p>${esc(TYPES[t].plus)}</p></div>
+      <div><p class="lbl">조심할 점</p><p>${esc(TYPES[t].risk)}</p></div>
+      <div><p class="lbl">성장 팁</p><p>${esc(TYPES[t].tip)}</p></div>
+    </div></div>`).join('')}
+    <div class="stack" style="display:grid;gap:12px">
+      <p class="sec-title">나와 잘 맞는 제품 단계</p>
+      <div class="stages">${STAGES.map((st, i) => `<div class="stage ${i === best ? 'best' : ''}"><span class="s1">${st.ko}</span><span class="s2">${st.sub}</span><span class="pct">${fits[i]}</span></div>`).join('')}</div>
+    </div>
+    <div style="display:grid;gap:12px">
+      <p class="sec-title">다섯 역할 한눈에 보기</p>
+      <div class="gallery">${ORDER.map(t => `<div class="mini ${picked.includes(t) ? '' : 'dim'}" style="--c:var(${TYPES[t].c})">${art(t)}<b>${t}</b><span>${TYPES[t].ko}</span></div>`).join('')}</div>
+    </div>
+    <details class="method"><summary>점수는 이렇게 계산했습니다</summary>
+      <div class="method-body">
+        <div class="m-row"><p class="m-k">문항 구성</p>
+          <p>다섯 역할을 둘씩 맞세운 10개 조합마다 4문항씩, 모두 40문항입니다.<br>각 역할은 16번씩 똑같이 나옵니다.</p></div>
+        <div class="m-row"><p class="m-k">배점</p>
+          <div class="pts">
+            <div><span class="pc big" style="--c:var(--a)"></span><b>A 2점</b></div>
+            <div><span class="pc mid-c" style="--c:var(--a)"></span><b>A 1.5점</b><span>B 0.5점</span></div>
+            <div><span class="pc small" style="--c:var(--mid)"></span><b>양쪽 1점</b></div>
+            <div><span class="pc mid-c" style="--c:var(--b)"></span><b>B 1.5점</b><span>A 0.5점</span></div>
+            <div><span class="pc big" style="--c:var(--b)"></span><b>B 2점</b></div>
+          </div></div>
+        <div class="m-row"><p class="m-k">100점 환산</p>
+          <p>역할별 최대 32점을 100점으로 바꿉니다.<br>모든 문항에 "비슷하다"를 고르면 다섯 역할 모두 50점입니다.</p></div>
+        <div class="m-row"><p class="m-k">결과 표시</p>
+          <p>1위는 주 역할, 2위는 보조 역할로 항상 함께 보여 줍니다.<br>3위가 2위와 10점 이내이고 55점 이상이면 보조 역할로 더합니다.</p></div>
+        <div class="m-row"><p class="m-k">제품 단계</p>
+          <div><ul>
+            <li><b>새로 시작하는 제품</b> 프로토타이퍼, 빌더, 스위퍼</li>
+            <li><b>성장하는 제품</b> 빌더, 스위퍼, 그로워, 약간의 메인테이너 <span class="w">(가중치 0.5)</span></li>
+            <li><b>자리 잡은 제품</b> 스위퍼, 그로워, 메인테이너, 약간의 빌더 <span class="w">(가중치 0.5)</span></li>
+          </ul>
+          </div></div>
+      </div>
+    </details>
+    <div class="row">
+      ${shared
+        ? '<button class="btn" type="button" id="btn-again">나도 테스트하기</button>'
+        : `<button class="btn" type="button" id="btn-share">결과 공유하기</button>
+      <button class="btn ghost" type="button" id="btn-link">링크 복사</button>
+      <button class="btn ghost" type="button" id="btn-again">다시 하기</button>`}
+    </div>
+    <p class="share-msg" id="share-msg" aria-live="polite"></p>`;
+  show('result');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (!quiet) {
+    const css = getComputedStyle(document.documentElement);
+    celebrate([...picked.map(t => css.getPropertyValue(TYPES[t].c).trim()), css.getPropertyValue('--brand').trim(), '#ffd166', '#ffffff']);
+  }
+  if (!shared) {
+    try { localStorage.setItem(KEY, JSON.stringify({ answers, cur, done: true })); } catch (e) {}
+    const url = shareUrl(pairKey, sc);
+    const text = `나의 개발자 아키타입은 ${picked.join('+')}, ${title}입니다.`;
+    const msg = t => { $('#share-msg').textContent = t; };
+    const copy = () => navigator.clipboard.writeText(`${text}\n${url}`).then(
+      () => msg('링크를 복사했습니다. 슬랙이나 카카오톡에 붙여 넣으세요.'),
+      () => msg(`복사하지 못했습니다. 이 주소를 직접 복사해 주세요. ${url}`));
+    // 휴대폰에서는 공유 시트가 열려 카카오톡, 슬랙을 바로 고를 수 있습니다
+    // 공유 시트가 없는 PC에서는 링크를 복사합니다
+    $('#btn-share').onclick = () => {
+      if (navigator.share) navigator.share({ title: '개발자 아키타입 테스트', text, url }).catch(() => {});
+      else copy();
+    };
+    $('#btn-link').onclick = copy;
+  }
+  $('#btn-again').onclick = () => {
+    history.replaceState(null, '', location.pathname);
+    answers = Array(QUESTIONS.length).fill(null);
+    cur = 0;
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    $('#btn-resume').hidden = true;
+    show('intro');
+  };
+}
+
+function startOver() {
+  answers = Array(QUESTIONS.length).fill(null);
+  cur = 0;
+  save();
+  $('#resume-note').hidden = true;
+  show('quiz');
+  renderQ();
+}
+function resume() {
+  const next = answers.findIndex(a => a === null);
+  cur = next === -1 ? QUESTIONS.length - 1 : next;
+  const done = answers.filter(a => a !== null).length;
+  $('#resume-text').textContent = `지난번에 ${done}문항까지 답했습니다. ${cur + 1}번부터 이어서 합니다.`;
+  $('#resume-note').hidden = false;
+  show('quiz');
+  renderQ();
+}
+$('#btn-start').onclick = startOver;
+$('#btn-restart').onclick = startOver;
+$('#btn-resume').onclick = resume;
+$('#opt-a').onclick = () => pick(0);
+$('#opt-b').onclick = () => pick(4);
+document.querySelectorAll('.circle').forEach(c => { c.onclick = () => pick(Number(c.dataset.v)); });
+$('#btn-prev').onclick = () => {
+  if (advancing) { clearTimeout(advancing); advancing = null; }
+  if (cur > 0) { cur -= 1; save(); renderQ(); }
+};
+document.addEventListener('keydown', e => {
+  if ($('#quiz').hidden) return;
+  if (e.key >= '1' && e.key <= '5') pick(Number(e.key) - 1);
+});
+
+// 결과마다 미리보기 이미지가 다른 공유 페이지로 보냅니다
+// 점수는 P, B, S, G, M 순서로 v 에 담습니다
+function shareUrl(pairKey, sc) {
+  const base = new URL('./', location.href).href;
+  return `${base}r/${pairKey}.html?v=${ORDER.map(t => sc[t]).join('-')}`;
+}
+function readShared() {
+  const v = new URLSearchParams(location.search).get('v');
+  if (!v) return null;
+  const nums = v.split('-').map(Number);
+  if (nums.length !== 5 || nums.some(n => !Number.isInteger(n) || n < 0 || n > 100)) return null;
+  const sc = {};
+  ORDER.forEach((t, i) => { sc[t] = nums[i]; });
+  return sc;
+}
+
+// 미리보기 이미지를 만들 때만 쓰는 화면입니다. ?og=main 또는 ?og=BS
+function renderOg(key) {
+  const pair = COMBOS[key];
+  const roles = pair ? ORDER.filter(t => key.includes(t)) : ORDER;
+  document.body.innerHTML = `<div class="og">
+    <div class="og-text">
+      <p class="og-k">개발자 아키타입 테스트</p>
+      ${pair
+        ? `<p class="og-code">${roles.map(t => `<span style="--c:var(${TYPES[t].c})">${t}</span>`).join('<i>+</i>')}</p>
+           <p class="og-title">${esc(pair[0])}</p>
+           <p class="og-sub">${roles.map(t => TYPES[t].ko).join(' + ')}</p>`
+        : `<p class="og-title big">AI 시대, 나는 팀에서<br>어떤 역할을 하는 사람일까</p>
+           <p class="og-sub">보리스 체르니의 다섯 역할로 알아보는 40문항 테스트</p>`}
+    </div>
+    <div class="og-art ${pair ? 'two' : 'five'}">${roles.map(art).join('')}</div>
+  </div>`;
+}
+
+// 저장된 진행 상황이 있으면 답하지 않은 첫 문항부터 바로 이어서 합니다
+// 다 풀었던 기록이면 결과를 다시 보여 줍니다
+const ogKey = new URLSearchParams(location.search).get('og');
+const sharedScore = readShared();
+if (ogKey) renderOg(ogKey);
+else if (sharedScore) renderResult(sharedScore);
+else try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+  if (saved && Array.isArray(saved.answers) && saved.answers.length === QUESTIONS.length) {
+    answers = saved.answers;
+    cur = Math.min(saved.cur || 0, QUESTIONS.length - 1);
+    if (saved.done && answers.every(a => a !== null)) renderResult(null, true);
+    else if (answers.some(a => a !== null)) { $('#btn-resume').hidden = false; resume(); }
+  }
+} catch (e) {}
+</script>
+</body>
+</html>
