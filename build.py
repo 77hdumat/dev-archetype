@@ -62,7 +62,7 @@ for key, name, desc in combos + singles:
     (ROOT / 'r' / f'{key}.html').write_text(PAGE.format(
         site=SITE, key=key,
         title=html.escape(f'나의 개발자 아키타입은 {code}, {name}'),
-        desc=html.escape(f'{roles}. {desc} 40문항으로 나의 역할도 알아보세요.'),
+        desc=html.escape(f'{roles}. {desc} 30문항으로 나의 역할도 알아보세요.'),
     ))
     shot(key)
 shot('main')
