@@ -11,7 +11,7 @@ ROOT = pathlib.Path(__file__).parent
 NAMES = {'P': '프로토타이퍼', 'B': '빌더', 'S': '스위퍼', 'G': '그로워', 'M': '메인테이너'}
 
 src = (ROOT / 'index.html').read_text()
-combos = re.findall(r"^\s+([PBSGM]{2}): \['([^']+)', '([^']+)'\]", src, re.M)
+combos = re.findall(r"^\s+([PBSGM]{2}): \['([^']+)', '([^']+)'", src, re.M)
 assert len(combos) == 10, combos
 
 PAGE = '''<!doctype html>

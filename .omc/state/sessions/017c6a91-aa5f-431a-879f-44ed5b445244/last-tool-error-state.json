@@ -1,0 +1,7 @@
+{
+  "tool_name": "mcp__chrome-devtools__take_screenshot",
+  "tool_input_preview": "{\"pageId\":10,\"fullPage\":true,\"filePath\":\"/private/tmp/claude-501/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244/scratchpad/full.png\"}",
+  "error": "Error: Access denied: path \"/private/tmp/claude-501/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244/scratchpad/full.png\" (canonical: \"/private/tmp/claude-501/-Users-seomingyu-Desktop/017c6a91-aa5f-431a-879f-44ed5b445244/scratchpad/full.png\") is not within any of the configured workspace roots.",
+  "timestamp": "2026-10-20T04:04:41.915Z",
+  "retry_count": 1
+}
