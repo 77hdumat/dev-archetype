@@ -98,6 +98,14 @@ button:focus-visible, .opt:focus-visible, .circle:focus-visible { outline: 3px s
 .about { display: grid; gap: 4px; padding-block: 14px; border-bottom: 1px solid var(--line); line-height: 1.7; }
 .about:first-child { border-top: 1px solid var(--line); }
 .about-k { font-size: 0.85rem; font-weight: 700; color: var(--brand); }
+.intro .lead { max-width: 620px; color: var(--muted); line-height: 1.7; }
+.about ul { margin: 4px 0; padding-left: 1.1em; display: grid; gap: 4px; }
+.intro-roles { display: grid; gap: 10px; margin-top: 6px; }
+.ir { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: center; }
+.ir svg { width: 44px; height: 44px; }
+.ir b { color: var(--c); }
+.ir p { line-height: 1.55; }
+.muted-en { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
 .intro-art { display: flex; gap: 6px; justify-content: center; }
 .intro-art span { width: 44px; height: 44px; border-radius: 50%; border: 2px solid; }
 
@@ -243,22 +251,25 @@ button:focus-visible, .opt:focus-visible, .circle:focus-visible { outline: 3px s
   </header>
 
   <section class="card intro" id="intro">
-    <div class="intro-art" aria-hidden="true">
-      <span style="border-color:var(--p)"></span><span style="border-color:var(--bu)"></span><span style="border-color:var(--s)"></span><span style="border-color:var(--g)"></span><span style="border-color:var(--m)"></span>
-    </div>
-    <h2>AI 시대, 나는 팀에서 어떤 역할을 하는 사람일까</h2>
+    <h2>AI 시대에 새로 바뀐 개발자의 다섯 가지 아키타입</h2>
+    <p class="lead">Claude Code를 만든 Anthropic의 보리스 체르니는 2026년 6월, AI 시대에는 개발자의 역할이 직무가 아니라 일하는 방식으로 나뉜다며 다섯 가지 아키타입을 제시했습니다.</p>
     <div class="intro-text">
       <div class="about">
-        <p class="about-k">어디서 나온 이야기인가요?</p>
-        <p>Claude Code를 만든 Anthropic의 보리스 체르니(Boris Cherny)가 2026년 6월에 소개한 개념입니다. 그는 AI가 코드 작성을 맡으면서 엔지니어, PM, 디자이너, 데이터 사이언티스트 사이의 구분이 흐려지고 있다고 봤습니다. 그리고 자기 팀을 관찰하며, 직무 대신 다섯 가지 역할로 사람들이 나뉜다는 것을 발견했습니다.</p>
+        <p class="about-k">왜 이 테스트를 만들었나요?</p>
+        <p>AI가 코드를 대신 쓰기 시작하면서 엔지니어, PM, 디자이너, 데이터 사이언티스트의 경계가 녹아내리고 있습니다. 체르니는 Claude Code 팀을 보며 직함 대신 다섯 가지 일하는 방식이 보인다고 했고, 여기에 두 가지를 덧붙였습니다.</p>
+        <ul>
+          <li>한 사람은 보통 두 가지, 때로는 세 가지 역할에 걸쳐 있고, 이 역할은 직무와 상관없습니다.</li>
+          <li>건강한 팀은 제품 단계에 따라 필요한 역할 조합이 다릅니다.</li>
+        </ul>
+        <p>그래서 내 아키타입을 알면 내가 어떤 일에서 힘을 내는지, 우리 팀에 어떤 역할이 비어 있는지, 지금 제품 단계에 맞는 구성인지 함께 이야기해 볼 수 있습니다. 이 테스트는 그 대화를 시작하려고 만들었습니다.</p>
       </div>
       <div class="about">
-        <p class="about-k">무엇을 알 수 있나요?</p>
-        <p>이 역할은 직무와 상관없습니다. 같은 개발자라도 새 아이디어를 쏟아내는 사람이 있고, 만든 것을 정리하고 지키는 사람이 있습니다. 이 테스트는 내 직무가 아니라 내가 실제로 어떤 일에서 힘을 내는지를 보고, 다섯 역할 중 어디에 가까운지 알려 줍니다.</p>
+        <p class="about-k">다섯 가지 아키타입</p>
+        <div class="intro-roles" id="intro-roles"></div>
       </div>
       <div class="about">
         <p class="about-k">어떻게 하나요?</p>
-        <p>문항마다 A, B 두 문장이 나옵니다. 나에게 더 가까운 쪽을 고르면 됩니다. 대부분은 두세 역할에 걸쳐 있기 때문에, 결과도 주 역할과 보조 역할이 함께 나옵니다.</p>
+        <p>문항마다 구체적인 상황과 A, B 두 가지 행동이 나옵니다. 나라면 어느 쪽에 더 가까운지 고르면 됩니다. 직함이 아니라 실제로 즐겁게, 자주 하는 일을 기준으로 답해 주세요. 결과에는 주 역할과 보조 역할이 함께 나옵니다.</p>
       </div>
     </div>
     <div class="facts"><span><b>30</b>문항</span><span>약 <b>5</b>분</span></div>
@@ -917,6 +928,8 @@ function renderOg(key) {
 
 // 저장된 진행 상황이 있으면 답하지 않은 첫 문항부터 바로 이어서 합니다
 // 다 풀었던 기록이면 결과를 다시 보여 줍니다
+$('#intro-roles').innerHTML = ORDER.map(t => `<div class="ir" style="--c:var(${TYPES[t].c})">${art(t)}<p><b>${TYPES[t].no}. ${TYPES[t].ko}</b> <span class="muted-en">${TYPES[t].en}</span><br>${esc(TYPES[t].def)}</p></div>`).join('');
+
 const ogKey = new URLSearchParams(location.search).get('og');
 const sharedScore = readShared();
 if (ogKey) renderOg(ogKey);
