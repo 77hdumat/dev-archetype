@@ -491,40 +491,36 @@ const COMBOS = {
     '성장 기회를 놓치지 않으면서도 그 성장이 시스템을 무너뜨리지 않게 지킵니다. 사용자가 빠르게 늘어나는 자리 잡은 제품에서 꼭 필요한 조합입니다.']
 };
 
-// 역할별 일러스트입니다. --c 는 역할 색입니다
+// 역할별 일러스트입니다. 동그란 캐릭터 하나에 소품 하나를 얹습니다
+// --c 는 역할 색입니다. 몸은 흰색을 섞어 파스텔로 만듭니다
+const FACE = `<circle cx="100" cy="118" r="44" fill="color-mix(in srgb, var(--c) 62%, #fff)"/>
+    <circle cx="86" cy="114" r="5" fill="#26283a"/><circle cx="114" cy="114" r="5" fill="#26283a"/>
+    <circle cx="87.5" cy="112.5" r="1.6" fill="#fff"/><circle cx="115.5" cy="112.5" r="1.6" fill="#fff"/>
+    <path d="M93 126q7 6 14 0" fill="none" stroke="#26283a" stroke-width="3.5" stroke-linecap="round"/>
+    <ellipse cx="75" cy="126" rx="6.5" ry="4" fill="#ff8fa3" opacity=".55"/>
+    <ellipse cx="125" cy="126" rx="6.5" ry="4" fill="#ff8fa3" opacity=".55"/>`;
 const ART = {
-  P: `<path d="M100 26v14M48 46l10 10M152 46l-10 10M30 94h14M156 94h14" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/>
-    <rect x="138" y="120" width="28" height="28" rx="4" fill="var(--c)" opacity=".45" transform="rotate(12 152 134)"/>
-    <rect x="30" y="124" width="24" height="24" rx="4" fill="var(--c)" opacity=".3" transform="rotate(-10 42 136)"/>
-    <path d="M100 52a40 40 0 0 0-24 72c6 5 8 10 8 16h32c0-6 2-11 8-16a40 40 0 0 0-24-72z" fill="var(--c)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
-    <path d="M92 122v-16a8 8 0 0 1 16 0v16" fill="none" stroke="var(--surface)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-    <rect x="82" y="146" width="36" height="10" rx="4" fill="var(--ink)"/><rect x="88" y="160" width="24" height="9" rx="4" fill="var(--ink)"/>`,
-  B: `<path d="M38 172h36M126 172h36" stroke="var(--ink)" stroke-width="5" stroke-linecap="round" opacity=".3"/>
-    <path d="M88 136q12 46 24 0z" fill="var(--c)" opacity=".5"/>
-    <path d="M100 28c24 18 32 52 26 96H74c-6-44 2-78 26-96z" fill="var(--surface)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
-    <path d="M100 28c10 7 17 17 21 28H79c4-11 11-21 21-28z" fill="var(--c)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
-    <circle cx="100" cy="82" r="12" fill="var(--c)" stroke="var(--ink)" stroke-width="5"/>
-    <path d="M75 100l-20 30h22zM125 100l20 30h-22z" fill="var(--c)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
-    <rect x="85" y="124" width="30" height="11" rx="2" fill="var(--ink)"/>`,
-  S: `<path d="M48 54l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="var(--c)"/>
-    <path d="M150 34L96 120" stroke="var(--ink)" stroke-width="9" stroke-linecap="round"/>
-    <path d="M80 110l32 20-14 32c-15 6-36-6-42-22z" fill="var(--c)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
-    <path d="M82 116l27 16" stroke="var(--ink)" stroke-width="5"/>
-    <text x="124" y="160" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="28" font-weight="600" fill="var(--ink)" opacity=".5">{ }</text>
-    <rect x="160" y="168" width="8" height="8" fill="var(--c)"/><rect x="172" y="152" width="6" height="6" fill="var(--c)" opacity=".6"/>`,
-  G: `<path d="M28 168h144" stroke="var(--ink)" stroke-width="5" stroke-linecap="round" opacity=".3"/>
-    <rect x="40" y="128" width="20" height="40" rx="3" fill="var(--c)" opacity=".3"/>
-    <rect x="66" y="106" width="20" height="62" rx="3" fill="var(--c)" opacity=".5"/>
-    <path d="M34 82l22-18 16 10 24-24" fill="none" stroke="var(--ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M84 50h12v12" fill="none" stroke="var(--ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M130 134V72" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/>
-    <path d="M130 104c-22 2-30-12-30-24 18 0 30 8 30 24z" fill="var(--surface)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
-    <path d="M130 88c20 0 30-14 30-28-18 0-30 10-30 28z" fill="var(--c)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
-    <path d="M102 134h56l-8 34h-40z" fill="var(--c)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>`,
-  M: `<circle cx="146" cy="146" r="26" fill="none" stroke="var(--c)" stroke-width="13" stroke-dasharray="10 7" opacity=".55"/>
-    <circle cx="146" cy="146" r="17" fill="var(--c)" opacity=".55"/>
-    <path d="M94 34l52 19v37c0 35-23 58-52 70-29-12-52-35-52-70V53z" fill="var(--c)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
-    <path d="M74 96l14 14 28-30" fill="none" stroke="var(--surface)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`
+  P: `${FACE}
+    <path d="M100 26v8M76 36l5 6M124 36l-5 6" stroke="#f5b82e" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="100" cy="54" r="13" fill="#ffd65a"/>
+    <rect x="94" y="65" width="12" height="7" rx="2" fill="#8a8ca0"/>`,
+  B: `${FACE}
+    <path d="M64 98a36 32 0 0 1 72 0z" fill="#ffc93c"/>
+    <rect x="96" y="66" width="8" height="32" rx="4" fill="#f5a623"/>
+    <rect x="56" y="94" width="88" height="9" rx="4.5" fill="#f5a623"/>`,
+  S: `${FACE}
+    <path d="M44 66l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#ffd65a"/>
+    <path d="M160 64l-22 78" stroke="#b07a4a" stroke-width="6" stroke-linecap="round"/>
+    <path d="M128 138l22 6-4 24-26-7z" fill="#f5c76a"/>
+    <circle cx="142" cy="128" r="7" fill="color-mix(in srgb, var(--c) 62%, #fff)"/>`,
+  G: `${FACE}
+    <path d="M100 76V56" stroke="#4cb35e" stroke-width="5" stroke-linecap="round"/>
+    <path d="M100 62c-4-12-14-16-22-14 2 10 10 16 22 14z" fill="#6fd17f"/>
+    <path d="M100 58c4-14 16-18 26-15-2 12-12 18-26 15z" fill="#6fd17f"/>`,
+  M: `${FACE}
+    <path d="M140 118l18 7v10c0 11-8 18-18 22-10-4-18-11-18-22v-10z" fill="#fff" stroke="var(--c)" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M133 136l5 5 9-10" fill="none" stroke="var(--c)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M100 74c-3-6 4-10 7-5" fill="none" stroke="color-mix(in srgb, var(--c) 62%, #fff)" stroke-width="4" stroke-linecap="round"/>`
 };
 function art(t) {
   return `<svg viewBox="0 0 200 200" role="img" aria-label="${TYPES[t].ko} 일러스트" style="--c:var(${TYPES[t].c})">
